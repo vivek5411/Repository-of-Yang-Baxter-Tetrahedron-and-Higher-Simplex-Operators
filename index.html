@@ -101,54 +101,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YBO Matrix and Eigenvalues Viewer</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        h1, h3 {
-            color: #333;
-        }
-        #matrix-display, #eigenvalues-display {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-top: 10px;
-            background-color: #f9f9f9;
-            white-space: pre-wrap;
-        }
-        button {
-            margin: 5px;
-            padding: 10px;
-            cursor: pointer;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            display: inline-block;
-        }
-        .ybo-type-btn {
-            background-color: #4CAF50;
-        }
-        .ybo-group {
-            margin-top: 10px;
-            display: flex;
-            flex-wrap: wrap;
-        }
-        .ybo-button {
-            width: 100px;
-            background-color: #4CAF50;
-        }
-        .hidden {
-            display: none;
-        }
-    </style>
-</head>
-<body>
-
-  <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YBO Matrix and Eigenvalues Viewer</title>
-    <style>
         table {
             border-collapse: collapse;
             width: 100%;
@@ -219,22 +171,53 @@
             document.getElementById('sub-buttons-9x9').classList.remove('hidden');
         });
 
-        // Matrix Data for 4x4 and 9x9 Matrices
+        // Matrix Data for 4x4 Matrices
         const matrixData = {
             'H3-1': {
-                matrix: [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]],
-                eigenvalues: [1, 2, 3, 4]
+                matrix: [[k, 0, 0, 0], [0, 0, p, 0], [0, q, 0, 0], [0, 0, 0, s]],
+                eigenvalues: ['eigenvalues for H3-1'] // Placeholder for eigenvalues
             },
             'H2-1': {
-                matrix: [[3, 2, 1, 0], [0, 1, 2, 3], [1, 0, 3, 2], [2, 3, 1, 0]],
-                eigenvalues: [4, 3, 2, 1]
+                matrix: [[k**2, 0, 0, 0], [0, k**2 - p * q, k * p, 0], [0, k * q, 0, 0], [0, 0, 0, k**2]],
+                eigenvalues: ['eigenvalues for H2-1'] // Placeholder for eigenvalues
             },
-            // Add more 4x4 YBOs here...
+            'H2-2': {
+                matrix: [[k**2, 0, 0, 0], [0, k**2 - p * q, k * p, 0], [0, k * q, 0, 0], [0, 0, 0, -p * q]],
+                eigenvalues: ['eigenvalues for H2-2'] // Placeholder for eigenvalues
+            },
+            'H2-3': {
+                matrix: [[k, p, q, s], [0, 0, k, p], [0, k, 0, q], [0, 0, 0, k]],
+                eigenvalues: ['eigenvalues for H2-3'] // Placeholder for eigenvalues
+            },
+            'H1-1': {
+                matrix: [[p**2 + 2 * p * q - q**2, 0, 0, p**2 - q**2], [0, p**2 - q**2, p**2 + q**2, 0], [0, p**2 + q**2, p**2 - q**2, 0], [p**2 - q**2, 0, 0, p**2 - 2 * p * q - q**2]],
+                eigenvalues: ['eigenvalues for H1-1'] // Placeholder for eigenvalues
+            },
+            'H1-2': {
+                matrix: [[p, 0, 0, k], [0, p - q, p, 0], [0, q, 0, 0], [0, 0, 0, -q]],
+                eigenvalues: ['eigenvalues for H1-2'] // Placeholder for eigenvalues
+            },
+            'H1-3': {
+                matrix: [[k**2, -k * p, k * p, p * q], [0, 0, k**2, k * q], [0, k**2, 0, -k * q], [0, 0, 0, k**2]],
+                eigenvalues: ['eigenvalues for H1-3'] // Placeholder for eigenvalues
+            },
+            'H1-4': {
+                matrix: [[0, 0, 0, p], [0, k, 0, 0], [0, 0, k, 0], [q, 0, 0, 0]],
+                eigenvalues: ['eigenvalues for H1-4'] // Placeholder for eigenvalues
+            },
+            'H0-1': {
+                matrix: [[1, 0, 0, 1], [0, 0, -1, 0], [0, -1, 0, 0], [0, 0, 0, 1]],
+                eigenvalues: ['eigenvalues for H0-1'] // Placeholder for eigenvalues
+            },
+            'H0-2': {
+                matrix: [[1, 0, 0, 1], [0, 1, 1, 0], [0, -1, 1, 0], [-1, 0, 0, 1]],
+                eigenvalues: ['eigenvalues for H0-2'] // Placeholder for eigenvalues
+            },
+            // Add more 9x9 matrices if needed
             'H9-1': {
                 matrix: Array(9).fill().map(() => Array(9).fill(1)), // Placeholder for 9x9
                 eigenvalues: Array(9).fill(1) // Placeholder for 9x9
             }
-            // Continue adding more matrices for the 9x9 YBOs...
         };
 
         // Function to display matrix in HTML table format
@@ -249,11 +232,12 @@
 
         // Function to display eigenvalues in HTML list format
         function displayEigenvalues(eigenvalues) {
-            return '<ul>' + eigenvalues.map(value => `<li>${value}</li>`).join('') + '</ul>';
+            return `<ul>${eigenvalues.map(value => `<li>${value}</li>`).join('')}</ul>`;
         }
 
         // Populate Matrix and Eigenvalues on YBO Button Click
-        document.querySelectorAll('.ybo-button').forEach(button => {
+        const yboButtons = document.querySelectorAll('.ybo-button');
+        yboButtons.forEach(button => {
             button.addEventListener('click', function() {
                 const ybo = this.getAttribute('data-ybo');
                 const matrix = matrixData[ybo]?.matrix || 'Matrix not available';
@@ -265,8 +249,6 @@
         });
     </script>
 </body>
-
-
     </script>
       <div class="Collaborators">
         
