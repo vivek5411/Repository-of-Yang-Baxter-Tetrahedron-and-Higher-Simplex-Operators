@@ -142,6 +142,32 @@
 </head>
 <body>
 
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YBO Matrix and Eigenvalues Viewer</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 10px 0;
+        }
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        .hidden {
+            display: none;
+        }
+        .ybo-group {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
     <h1>YBO Matrix and Eigenvalues Viewer</h1>
 
     <!-- Buttons to Choose Between 4x4 and 9x9 YBOs -->
@@ -197,13 +223,13 @@
         const matrixData = {
             'H3-1': {
                 matrix: [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]],
-                eigenvalues: [1, 2, 3, 4] // Placeholder for 4x4
+                eigenvalues: [1, 2, 3, 4]
             },
             'H2-1': {
                 matrix: [[3, 2, 1, 0], [0, 1, 2, 3], [1, 0, 3, 2], [2, 3, 1, 0]],
-                eigenvalues: [4, 3, 2, 1] // Placeholder for 4x4
+                eigenvalues: [4, 3, 2, 1]
             },
-            // Add more YBOs and their respective matrices and eigenvalues here...
+            // Add more 4x4 YBOs here...
             'H9-1': {
                 matrix: Array(9).fill().map(() => Array(9).fill(1)), // Placeholder for 9x9
                 eigenvalues: Array(9).fill(1) // Placeholder for 9x9
@@ -211,16 +237,30 @@
             // Continue adding more matrices for the 9x9 YBOs...
         };
 
+        // Function to display matrix in HTML table format
+        function displayMatrix(matrix) {
+            let tableHtml = '<table><tbody>';
+            matrix.forEach(row => {
+                tableHtml += '<tr>' + row.map(cell => `<td>${cell}</td>`).join('') + '</tr>';
+            });
+            tableHtml += '</tbody></table>';
+            return tableHtml;
+        }
+
+        // Function to display eigenvalues in HTML list format
+        function displayEigenvalues(eigenvalues) {
+            return '<ul>' + eigenvalues.map(value => `<li>${value}</li>`).join('') + '</ul>';
+        }
+
         // Populate Matrix and Eigenvalues on YBO Button Click
-        const yboButtons = document.querySelectorAll('.ybo-button');
-        yboButtons.forEach(button => {
+        document.querySelectorAll('.ybo-button').forEach(button => {
             button.addEventListener('click', function() {
                 const ybo = this.getAttribute('data-ybo');
                 const matrix = matrixData[ybo]?.matrix || 'Matrix not available';
                 const eigenvalues = matrixData[ybo]?.eigenvalues || 'Eigenvalues not available';
 
-                document.getElementById('matrix-display').textContent = JSON.stringify(matrix, null, 2);
-                document.getElementById('eigenvalues-display').textContent = eigenvalues.toString();
+                document.getElementById('matrix-display').innerHTML = typeof matrix === 'string' ? matrix : displayMatrix(matrix);
+                document.getElementById('eigenvalues-display').innerHTML = typeof eigenvalues === 'string' ? eigenvalues : displayEigenvalues(eigenvalues);
             });
         });
     </script>
