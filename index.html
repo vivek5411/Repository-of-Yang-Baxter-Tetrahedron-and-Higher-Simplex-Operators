@@ -162,9 +162,20 @@
     <!-- Display for 9x9 YBO Buttons -->
     <div id="sub-buttons-9x9" class="ybo-group hidden">
         <button class="ybo-button" data-ybo="H9-1">H9,1</button>
-        <button class="ybo-button" data-ybo="H9-2">H9,2</button>
-        <button class="ybo-button" data-ybo="H9-3">H9,3</button>
-        <button class="ybo-button" data-ybo="H9-4">H9,4</button>
+        <button class="ybo-button" data-ybo="H8-1">H8,1</button>
+        <button class="ybo-button" data-ybo="H8-2">H8,2</button>
+        <button class="ybo-button" data-ybo="H8-3">H8,3</button>
+        <button class="ybo-button" data-ybo="H8-3">H8,3</button>
+        <button class="ybo-button" data-ybo="H7-1">H7,1</button>
+        <button class="ybo-button" data-ybo="H7-2">H7,2</button>
+        <button class="ybo-button" data-ybo="H6-1">H6,1</button>
+        <button class="ybo-button" data-ybo="H6-2">H6,2</button>
+        <button class="ybo-button" data-ybo="H4-1">H4,1</button>
+        <button class="ybo-button" data-ybo="H4-2">H4,2</button>
+        <button class="ybo-button" data-ybo="H4-3">H4,3</button>
+        <button class="ybo-button" data-ybo="H4-4">H4,4</button>
+        
+        
         <!-- Continue to add 35 buttons... -->
         <button class="ybo-button" data-ybo="H9-35">H9,35</button>
     </div>
@@ -281,10 +292,87 @@
             eigenvalues: ['eigenvalues for H0-2'] // Placeholder for eigenvalues
         },
         // Add more 9x9 matrices if needed
-        'H9-1': {
-            matrix: Array(9).fill().map(() => Array(9).fill(1)), // Placeholder for 9x9
-            eigenvalues: Array(9).fill(1) // Placeholder for 9x9
-        }
+       'H9-1': {
+    matrix: [
+        ['1', 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 'p', 0, 0, '1 - q*η²', 0, 0, 0, 0],
+        [0, 0, 'p²', 0, 0, '(1 - q*η)*x', 0, '(1 - q*η)*(1 - q*η²)', 0],
+        [0, 0, 0, 'q*p⁻¹*η²', 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 'q*η', 0, 0, '-q*(1 - q*η²)/x', 0],
+        [0, 0, 0, 0, 0, 'q*p', 0, 0, '-η²*q*(1 - q*η)'],
+        [0, 0, 0, 0, 0, 0, 'q²*p⁻²*η', 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 'q²*p⁻¹*η²', 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 'q²']
+    ],
+    eigenvalues: ['eigenvalues for H1-91'] // Placeholder for eigenvalues
+},'H8-1': {
+    matrix: [
+        ['1', 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 'p', 0, '1 - q', 0, 0, 0, 0, 0],
+        [0, 0, 'c', 0, 0, 0, '1 - q', 0, 0],
+        [0, 0, 0, 'q*p⁻¹', 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 'A', 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 'q*k⁻¹', 0, '1 - q', 0],
+        [0, 0, 0, 0, 0, 0, 'q*c⁻¹', 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 'k', 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 'B']
+    ],
+    eigenvalues: ['eigenvalues for H1-81'] // Placeholder for eigenvalues
+},'H8-2': {
+    matrix: [
+        ['1', 0, 0, 0, 0, 'x', 0, '-x*p²*μ⁻¹', 0],
+        [0, 'p', 0, '1 - μ', 0, 0, 0, 0, 0],
+        [0, 0, 'p⁻¹', 0, 0, 0, '1 - μ', 0, 0],
+        [0, 0, 0, 'p⁻¹*μ', 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, '1', 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 'p⁻²*μ²', 0, '1 - μ', 0],
+        [0, 0, 0, 0, 0, 0, 'p*μ', 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 'p²*μ⁻¹', 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 'μ³']
+    ],
+    eigenvalues: ['eigenvalues for H1-82'] // Placeholder for eigenvalues
+},'H8-3': {
+    matrix: [
+        ['1', 0, 0, 0, 0, 'x', 0, 0, 0],
+        [0, 'p', 0, '1 - ξ', 0, 0, 0, 0, 0],
+        [0, 0, 'p⁻¹', 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 'p⁻¹*ξ', 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, '1', 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 'p⁻²*ξ²', 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 'p*ξ²', 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 'p²', 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 'ξ']
+    ],
+    eigenvalues: ['eigenvalues for H1-83'] // Placeholder for eigenvalues
+},'H7-1': {
+    matrix: [
+        ['1', 0, 0, 0, 0, 'x*y', 0, 'x*y*ξ²*(1 - q*η)', 0],
+        [0, 'ξ', 0, '1 - q*η²', 0, 0, 0, 0, 'y*ξ*(1 - q*η²)'],
+        [0, 0, 'ξ²', 0, '(1 - q*η)*x', 0, '(1 - q*η)*(1 - q*η²)', 0, 0],
+        [0, 0, 0, 'q*ξ²*η²', 0, 0, 0, 0, '-y*q*η'],
+        [0, 0, 0, 0, 'q*η', 0, 0, '-q*(1 - q*η²)/x', 0],
+        [0, 0, 0, 0, 0, 'q*ξ', 0, 0, '-η²*q*(1 - q*η)'],
+        [0, 0, 0, 0, 0, 0, 'q²*ξ*η', 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 'q²*ξ²*η²', 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 'q²']
+    ],
+    eigenvalues: ['eigenvalues for H1-71'] // Placeholder for eigenvalues
+},
+    'H7-2': {
+    matrix: [
+        ['1', 0, 0, 0, 'x', 0, 0, 0, 0],
+        [0, 'ε₁', 0, '1 - q', 0, 0, 0, 0, 0],
+        [0, 0, 'p', 0, 0, 0, '1 - q', 0, 0],
+        [0, 0, 0, 'q*ε₁', 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, '-q', 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 'p*ε₂', 0, '1 - q', 0],
+        [0, 0, 0, 0, 0, 0, 'p⁻¹*q', 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 'p⁻¹*q*ε₂', 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 'A']
+    ],
+    eigenvalues: ['eigenvalues for H1-72'] // Placeholder for eigenvalues
+
+
     };
 
     // Function to display matrix in HTML table format
