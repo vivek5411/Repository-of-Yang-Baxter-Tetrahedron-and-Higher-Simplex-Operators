@@ -87,6 +87,30 @@
         .ybo-group {
             margin-top: 10px;
         }
+
+        /* Styles for Buttons */
+        .ybo-type-btn, .ybo-button {
+            background-color: #0044cc; /* Blue background */
+            border: none;
+            color: white; /* White text */
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px; /* Rounded corners */
+            transition: background-color 0.3s; /* Smooth transition for hover effect */
+        }
+
+        .ybo-type-btn:hover, .ybo-button:hover {
+            background-color: #0033aa; /* Darker blue on hover */
+        }
+
+        .ybo-type-btn:active, .ybo-button:active {
+            background-color: #002288; /* Even darker blue on click */
+        }
     </style>
 </head>
 <body>
@@ -185,10 +209,15 @@
   author = {Author Name},
   title = {Title of Website},
   year = {2024},
-  url = {https://vivek5411.github.io/knot-theory-website/},
-  note = {Accessed: Month Day, Year}
+  url = {https://vivek5411.github.io/knot-theory-website/}
 }
     </pre>
+</section>
+
+<section id="contact">
+    <h2>Contact</h2>
+    <p>If you have any questions or would like to collaborate, please reach out to:</p>
+    <p><strong>Email:</strong> <a href="mailto:your.email@example.com">your.email@example.com</a></p>
 </section>
 
 <footer>
@@ -196,7 +225,7 @@
 </footer>
 
 <script>
-    // Show 4x4 or 9x9 YBO Buttons on Click
+    // Toggle between 4x4 and 9x9 YBO buttons
     document.getElementById('btn-4x4').addEventListener('click', function() {
         document.getElementById('sub-buttons-4x4').classList.remove('hidden');
         document.getElementById('sub-buttons-9x9').classList.add('hidden');
