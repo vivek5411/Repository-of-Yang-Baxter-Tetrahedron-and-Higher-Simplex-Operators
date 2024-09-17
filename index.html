@@ -94,7 +94,8 @@
       <section id="home">
         <h2>About Yang-Baxter operators</h2>
         <p>Yang-Baxter and 2-simplex operators play a key role in both Physics and Mathematics, with applications in quantum systems, knot theory, and quantum computation. Their higher-dimensional counterparts, n-simplex operators, extend these uses and are gaining importance. This website offers a comprehensive update on the latest advancements in this field..</p>
-<!DOCTYPE html>
+
+        <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -232,7 +233,7 @@
 
         // Function to display eigenvalues in HTML list format
         function displayEigenvalues(eigenvalues) {
-            return `<ul>${eigenvalues.map(value => `<li>${value}</li>`).join('')}</ul>`;
+            return '<ul>' + eigenvalues.map(val => `<li>${val}</li>`).join('') + '</ul>';
         }
 
         // Populate Matrix and Eigenvalues on YBO Button Click
@@ -249,6 +250,8 @@
         });
     </script>
 </body>
+</html>
+
     </script>
       <div class="Collaborators">
         
