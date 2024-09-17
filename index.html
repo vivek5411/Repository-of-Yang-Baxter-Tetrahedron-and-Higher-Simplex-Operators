@@ -70,38 +70,7 @@
             bottom: 0;
             width: 100%;
         }
-    </style>
-</head>
-<body>
- <header>
-     <h1 id="Yang-Baxter-and-Tetrahedron-Equations-for-Quantum-Circuit-Design">Yang-Baxter and Tetrahedron Equations for Quantum Circuit Design</h1>
-     <p class="small-text">This website combines two important theoretical developments: integrable models (in both low and higher dimensions) and the rapidly growing field of quantum computation (currently under development!).</p>
-</header>
 
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#f 
-       constant Yang-Baxter operators"></a></li>
-         <li><a href="#projects">Research & Projects</a></li>
-             <li><a href="#Collaborators">Collaborators</a></li>
-            <li><a href="#Citation">Citation</a></li>
-
-         <li><a href="#contact">Contact</a></li>
-            
-        </ul>
-    </nav>
-      <section id="home">
-        <h2>About Yang-Baxter operators</h2>
-        <p>Yang-Baxter and 2-simplex operators play a key role in both Physics and Mathematics, with applications in quantum systems, knot theory, and quantum computation. Their higher-dimensional counterparts, n-simplex operators, extend these uses and are gaining importance. This website offers a comprehensive update on the latest advancements in this field..</p>
-
-        <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YBO Matrix and Eigenvalues Viewer</title>
-    <style>
         table {
             border-collapse: collapse;
             width: 100%;
@@ -121,12 +90,34 @@
     </style>
 </head>
 <body>
-    <h1>YBO Matrix and Eigenvalues Viewer</h1>
+<header>
+    <h1 id="Yang-Baxter-and-Tetrahedron-Equations-for-Quantum-Circuit-Design">Yang-Baxter and Tetrahedron Equations for Quantum Circuit Design</h1>
+    <p class="small-text">This website combines two important theoretical developments: integrable models (in both low and higher dimensions) and the rapidly growing field of quantum computation (currently under development!).</p>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#ybos">Yang-Baxter Operators</a></li>
+        <li><a href="#projects">Research & Projects</a></li>
+        <li><a href="#collaborators">Collaborators</a></li>
+        <li><a href="#citation">Citation</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<section id="home">
+    <h2>About Yang-Baxter Operators</h2>
+    <p>Yang-Baxter and 2-simplex operators play a key role in both Physics and Mathematics, with applications in quantum systems, knot theory, and quantum computation. Their higher-dimensional counterparts, n-simplex operators, extend these uses and are gaining importance. This website offers a comprehensive update on the latest advancements in this field.</p>
+</section>
+
+<section id="ybos">
+    <h2>YBO Matrix and Eigenvalues Viewer</h2>
 
     <!-- Buttons to Choose Between 4x4 and 9x9 YBOs -->
     <div id="ybo-type-buttons">
-        <button class="ybo-type-btn" id="btn-4x4">4x4 YBO's</button>
-        <button class="ybo-type-btn" id="btn-9x9">9x9 YBO's</button>
+        <button class="ybo-type-btn" id="btn-4x4">4x4 YBOs</button>
+        <button class="ybo-type-btn" id="btn-9x9">9x9 YBOs</button>
     </div>
 
     <!-- Display for 4x4 YBO Buttons -->
@@ -159,135 +150,139 @@
     
     <h3>Eigenvalues:</h3>
     <div id="eigenvalues-display">Click a YBO button to view the eigenvalues.</div>
+</section>
 
-    <script>
-        // Show 4x4 or 9x9 YBO Buttons on Click
-        document.getElementById('btn-4x4').addEventListener('click', function() {
-            document.getElementById('sub-buttons-4x4').classList.remove('hidden');
-            document.getElementById('sub-buttons-9x9').classList.add('hidden');
-        });
+<section id="projects">
+    <!-- Content for Research & Projects -->
+</section>
 
-        document.getElementById('btn-9x9').addEventListener('click', function() {
-            document.getElementById('sub-buttons-4x4').classList.add('hidden');
-            document.getElementById('sub-buttons-9x9').classList.remove('hidden');
-        });
-
-        // Matrix Data for 4x4 Matrices
-        const matrixData = {
-            'H3-1': {
-                matrix: [[k, 0, 0, 0], [0, 0, p, 0], [0, q, 0, 0], [0, 0, 0, s]],
-                eigenvalues: ['eigenvalues for H3-1'] // Placeholder for eigenvalues
-            },
-            'H2-1': {
-                matrix: [[k**2, 0, 0, 0], [0, k**2 - p * q, k * p, 0], [0, k * q, 0, 0], [0, 0, 0, k**2]],
-                eigenvalues: ['eigenvalues for H2-1'] // Placeholder for eigenvalues
-            },
-            'H2-2': {
-                matrix: [[k**2, 0, 0, 0], [0, k**2 - p * q, k * p, 0], [0, k * q, 0, 0], [0, 0, 0, -p * q]],
-                eigenvalues: ['eigenvalues for H2-2'] // Placeholder for eigenvalues
-            },
-            'H2-3': {
-                matrix: [[k, p, q, s], [0, 0, k, p], [0, k, 0, q], [0, 0, 0, k]],
-                eigenvalues: ['eigenvalues for H2-3'] // Placeholder for eigenvalues
-            },
-            'H1-1': {
-                matrix: [[p**2 + 2 * p * q - q**2, 0, 0, p**2 - q**2], [0, p**2 - q**2, p**2 + q**2, 0], [0, p**2 + q**2, p**2 - q**2, 0], [p**2 - q**2, 0, 0, p**2 - 2 * p * q - q**2]],
-                eigenvalues: ['eigenvalues for H1-1'] // Placeholder for eigenvalues
-            },
-            'H1-2': {
-                matrix: [[p, 0, 0, k], [0, p - q, p, 0], [0, q, 0, 0], [0, 0, 0, -q]],
-                eigenvalues: ['eigenvalues for H1-2'] // Placeholder for eigenvalues
-            },
-            'H1-3': {
-                matrix: [[k**2, -k * p, k * p, p * q], [0, 0, k**2, k * q], [0, k**2, 0, -k * q], [0, 0, 0, k**2]],
-                eigenvalues: ['eigenvalues for H1-3'] // Placeholder for eigenvalues
-            },
-            'H1-4': {
-                matrix: [[0, 0, 0, p], [0, k, 0, 0], [0, 0, k, 0], [q, 0, 0, 0]],
-                eigenvalues: ['eigenvalues for H1-4'] // Placeholder for eigenvalues
-            },
-            'H0-1': {
-                matrix: [[1, 0, 0, 1], [0, 0, -1, 0], [0, -1, 0, 0], [0, 0, 0, 1]],
-                eigenvalues: ['eigenvalues for H0-1'] // Placeholder for eigenvalues
-            },
-            'H0-2': {
-                matrix: [[1, 0, 0, 1], [0, 1, 1, 0], [0, -1, 1, 0], [-1, 0, 0, 1]],
-                eigenvalues: ['eigenvalues for H0-2'] // Placeholder for eigenvalues
-            },
-            // Add more 9x9 matrices if needed
-            'H9-1': {
-                matrix: Array(9).fill().map(() => Array(9).fill(1)), // Placeholder for 9x9
-                eigenvalues: Array(9).fill(1) // Placeholder for 9x9
-            }
-        };
-
-        // Function to display matrix in HTML table format
-        function displayMatrix(matrix) {
-            let tableHtml = '<table><tbody>';
-            matrix.forEach(row => {
-                tableHtml += '<tr>' + row.map(cell => `<td>${cell}</td>`).join('') + '</tr>';
-            });
-            tableHtml += '</tbody></table>';
-            return tableHtml;
-        }
-
-        // Function to display eigenvalues in HTML list format
-        function displayEigenvalues(eigenvalues) {
-            return '<ul>' + eigenvalues.map(val => `<li>${val}</li>`).join('') + '</ul>';
-        }
-
-        // Populate Matrix and Eigenvalues on YBO Button Click
-        const yboButtons = document.querySelectorAll('.ybo-button');
-        yboButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const ybo = this.getAttribute('data-ybo');
-                const matrix = matrixData[ybo]?.matrix || 'Matrix not available';
-                const eigenvalues = matrixData[ybo]?.eigenvalues || 'Eigenvalues not available';
-
-                document.getElementById('matrix-display').innerHTML = typeof matrix === 'string' ? matrix : displayMatrix(matrix);
-                document.getElementById('eigenvalues-display').innerHTML = typeof eigenvalues === 'string' ? eigenvalues : displayEigenvalues(eigenvalues);
-            });
-        });
-    </script>
-</body>
-</html>
-
-    </script>
-      <div class="Collaborators">
-        
-        <!-- Collaborator 1 -->
-        <div class="Collaborators">
-            <h3>Dr. </h3>
-            <p><strong>Affiliation:</strong> </p>
-            <p class="email"><strong>Email:</strong> <a href="mailto:johndoe@example.com">xyz </a></p>
-        </div>
-
-        <!-- Collaborator 2 -->
-       
-
-        <!-- Collaborator 3 -->
-        
-        
+<section id="collaborators">
+    <h2>Collaborators</h2>
+    <!-- Collaborator 1 -->
+    <div class="collaborator">
+        <h3>Dr. Jane Doe</h3>
+        <p><strong>Affiliation:</strong> University XYZ</p>
+        <p class="email"><strong>Email:</strong> <a href="mailto:jane.doe@example.com">jane.doe@example.com</a></p>
     </div>
-      <!-- Citation Section -->
-    <div id="Citation">
-        <h2>How to Cite  Website</h2>
-        <p>If you use any data, polynomials, or tools provided by this website in your research, please cite the project as follows:</p>
-        
 
-        <h3>BibTeX Citation:</h3>
-        <pre>
+    <!-- Collaborator 2 -->
+    <div class="collaborator">
+        <h3>Dr. John Smith</h3>
+        <p><strong>Affiliation:</strong> Research Institute ABC</p>
+        <p class="email"><strong>Email:</strong> <a href="mailto:john.smith@example.com">john.smith@example.com</a></p>
+    </div>
+
+    <!-- Add more collaborators if needed -->
+</section>
+
+<section id="citation">
+    <h2>How to Cite This Website</h2>
+    <p>If you use any data, polynomials, or tools provided by this website in your research, please cite the project as follows:</p>
+
+    <h3>BibTeX Citation:</h3>
+    <pre>
 @misc{author2024website,
-  author = {},
+  author = {Author Name},
   title = {Title of Website},
   year = {2024},
   url = {https://vivek5411.github.io/knot-theory-website/},
   note = {Accessed: Month Day, Year}
 }
-        </pre>
+    </pre>
+</section>
 
+<footer>
+    <p>&copy; 2024 Your Name. All rights reserved.</p>
+</footer>
 
-    </div>
+<script>
+    // Show 4x4 or 9x9 YBO Buttons on Click
+    document.getElementById('btn-4x4').addEventListener('click', function() {
+        document.getElementById('sub-buttons-4x4').classList.remove('hidden');
+        document.getElementById('sub-buttons-9x9').classList.add('hidden');
+    });
 
+    document.getElementById('btn-9x9').addEventListener('click', function() {
+        document.getElementById('sub-buttons-4x4').classList.add('hidden');
+        document.getElementById('sub-buttons-9x9').classList.remove('hidden');
+    });
+
+    // Matrix Data for 4x4 Matrices
+    const matrixData = {
+        'H3-1': {
+            matrix: [[ 'k', 0, 0, 0], [0, 0, 'p', 0], [0, 'q', 0, 0], [0, 0, 0, 's']],
+            eigenvalues: ['eigenvalues for H3-1'] // Placeholder for eigenvalues
+        },
+        'H2-1': {
+            matrix: [[ 'k^2', 0, 0, 0], [0, 'k^2 - p * q', 'k * p', 0], [0, 'k * q', 0, 0], [0, 0, 0, 'k^2']],
+            eigenvalues: ['eigenvalues for H2-1'] // Placeholder for eigenvalues
+        },
+        'H2-2': {
+            matrix: [[ 'k^2', 0, 0, 0], [0, 'k^2 - p * q', 'k * p', 0], [0, 'k * q', 0, 0], [0, 0, 0, '-p * q']],
+            eigenvalues: ['eigenvalues for H2-2'] // Placeholder for eigenvalues
+        },
+        'H2-3': {
+            matrix: [[ 'k', 'p', 'q', 's'], [0, 0, 'k', 'p'], [0, 'k', 0, 'q'], [0, 0, 0, 'k']],
+            eigenvalues: ['eigenvalues for H2-3'] // Placeholder for eigenvalues
+        },
+        'H1-1': {
+            matrix: [[ 'p^2 + 2 * p * q - q^2', 0, 0, 'p^2 - q^2'], [0, 'p^2 - q^2', 'p^2 + q^2', 0], [0, 'p^2 + q^2', 'p^2 - q^2', 0], ['p^2 - q^2', 0, 0, 'p^2 - 2 * p * q - q^2']],
+            eigenvalues: ['eigenvalues for H1-1'] // Placeholder for eigenvalues
+        },
+        'H1-2': {
+            matrix: [[ 'p', 0, 0, 'k'], [0, 'p - q', 'p', 0], [0, 'q', 0, 0], [0, 0, 0, '-q']],
+            eigenvalues: ['eigenvalues for H1-2'] // Placeholder for eigenvalues
+        },
+        'H1-3': {
+            matrix: [[ 'k^2', '-k * p', 'k * p', 'p * q'], [0, 0, 'k^2', 'k * q'], [0, 'k^2', 0, '-k * q'], [0, 0, 0, 'k^2']],
+            eigenvalues: ['eigenvalues for H1-3'] // Placeholder for eigenvalues
+        },
+        'H1-4': {
+            matrix: [[ 0, 0, 0, 'p'], [0, 'k', 0, 0], [0, 0, 'k', 0], ['q', 0, 0, 0]],
+            eigenvalues: ['eigenvalues for H1-4'] // Placeholder for eigenvalues
+        },
+        'H0-1': {
+            matrix: [[ 1, 0, 0, 1], [0, 0, -1, 0], [0, -1, 0, 0], [0, 0, 0, 1]],
+            eigenvalues: ['eigenvalues for H0-1'] // Placeholder for eigenvalues
+        },
+        'H0-2': {
+            matrix: [[ 1, 0, 0, 1], [0, 1, 1, 0], [0, -1, 1, 0], [-1, 0, 0, 1]],
+            eigenvalues: ['eigenvalues for H0-2'] // Placeholder for eigenvalues
+        },
+        // Add more 9x9 matrices if needed
+        'H9-1': {
+            matrix: Array(9).fill().map(() => Array(9).fill(1)), // Placeholder for 9x9
+            eigenvalues: Array(9).fill(1) // Placeholder for 9x9
+        }
+    };
+
+    // Function to display matrix in HTML table format
+    function displayMatrix(matrix) {
+        let tableHtml = '<table><tbody>';
+        matrix.forEach(row => {
+            tableHtml += '<tr>' + row.map(cell => `<td>${cell}</td>`).join('') + '</tr>';
+        });
+        tableHtml += '</tbody></table>';
+        return tableHtml;
+    }
+
+    // Function to display eigenvalues in HTML list format
+    function displayEigenvalues(eigenvalues) {
+        return '<ul>' + eigenvalues.map(val => `<li>${val}</li>`).join('') + '</ul>';
+    }
+
+    // Populate Matrix and Eigenvalues on YBO Button Click
+    const yboButtons = document.querySelectorAll('.ybo-button');
+    yboButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const ybo = this.getAttribute('data-ybo');
+            const matrix = matrixData[ybo]?.matrix || 'Matrix not available';
+            const eigenvalues = matrixData[ybo]?.eigenvalues || 'Eigenvalues not available';
+
+            document.getElementById('matrix-display').innerHTML = typeof matrix === 'string' ? matrix : displayMatrix(matrix);
+            document.getElementById('eigenvalues-display').innerHTML = typeof eigenvalues === 'string' ? eigenvalues : displayEigenvalues(eigenvalues);
+        });
+    });
+</script>
 </body>
 </html>
