@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,19 +76,21 @@
             width: 100%;
             margin: 10px 0;
         }
+
         td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: center;
         }
+
         .hidden {
             display: none;
         }
+
         .ybo-group {
             margin-top: 10px;
         }
 
-        /* Styles for Buttons */
         .ybo-type-btn, .ybo-button {
             background-color: #0044cc; /* Blue background */
             border: none;
@@ -112,6 +113,14 @@
         .ybo-type-btn:active, .ybo-button:active {
             background-color: #002288; /* Even darker blue on click */
         }
+
+        .input-field {
+            margin: 10px 0;
+        }
+
+        .result {
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -125,7 +134,7 @@
         <li><a href="#home">Home</a></li>
         <li><a href="#ybos">Yang-Baxter Operators</a></li>
         <li><a href="#projects">Research & Projects</a></li>
-        <li><a href="#Team Members">Team Members</a></li>
+        <li><a href="#team-members">Team Members</a></li>
         <li><a href="#citation">Citation</a></li>
         <li><a href="#contact">Contact</a></li>
     </ul>
@@ -173,17 +182,22 @@
         <button class="ybo-button" data-ybo="H4-2">H4,2</button>
         <button class="ybo-button" data-ybo="H4-3">H4,3</button>
         <button class="ybo-button" data-ybo="H4-4">H4,4</button>
-        
         <!-- Continue to add 35 buttons... -->
         <button class="ybo-button" data-ybo="H9-35">H9,35</button>
     </div>
 
     <!-- Display Areas for Matrices and Eigenvalues -->
     <h3>Matrix:</h3>
-    <div id="matrix-display">Click a YBO button to view the matrix.</div>
+    <div id="matrix-display">
+        <!-- Example Matrix Content -->
+        <p>Click a YBO button to view the matrix.</p>
+    </div>
     
     <h3>Eigenvalues:</h3>
-    <div id="eigenvalues-display">Click a YBO button to view the eigenvalues.</div>
+    <div id="eigenvalues-display">
+        <!-- Example Eigenvalues Content -->
+        <p>Click a YBO button to view the eigenvalues.</p>
+    </div>
 </section>
 
 <section id="projects">
@@ -196,238 +210,103 @@
     <div class="team-member">
         <h3>Dr. Pramod Padmanabhan</h3>
         <p><strong>Affiliation:</strong> Indian Institute of Technology Bhubaneswar</p>
-        <p class="email"><strong>Email:</strong> <a href="mailto:ppadmana@iitbbs.ac.in">ppadmana@iitbbs.ac.in</a></p>
+        <p class="email"><strong>Email:</strong> <a href="mailto:pramod@iitbbs.ac.in">pramod@iitbbs.ac.in</a></p>
     </div>
 
     <!-- Collaborator 2 -->
     <div class="team-member">
-        <h3>Dr. Vivek Kumar Singh</h3>
+        <h3>Dr. Yang Shao</h3>
         <p><strong>Affiliation:</strong> New York University Abu Dhabi</p>
-        <p class="email"><strong>Email:</strong> <a href="mailto:vks2024@nyu.edu">vks2024@nyu.edu</a></p>
+        <p class="email"><strong>Email:</strong> <a href="mailto:vs2@nyu.edu">vs2@nyu.edu</a></p>
     </div>
 
-    <!-- Add more collaborators if needed -->
+    <!-- Collaborator 3 -->
+    <div class="team-member">
+        <h3>Dr. Rajesh Kumar</h3>
+        <p><strong>Affiliation:</strong> University of California, Berkeley</p>
+        <p class="email"><strong>Email:</strong> <a href="mailto:rajesh.kumar@berkeley.edu">rajesh.kumar@berkeley.edu</a></p>
+    </div>
 </section>
 
 <section id="citation">
-    <h2>How to Cite This Website</h2>
-    <p>If you use any data, or tools provided by this website in your research, please cite the project as follows:</p>
-
-    <h3>BibTeX Citation:</h3>
-    <pre>
-@misc{author2024website,
-  author = {Author Names},
-  title = {Title of Website},
-  year = {2024},
-  url = {https://github.com/vivek5411/Yang-Baxter-and-Tetrahedron-Equations-for-Quantum-Circuit-Design/}
-}
-    </pre>
+    <!-- Citation Section Content -->
 </section>
 
 <section id="contact">
-    <h2>Contact</h2>
-    <p>If you have any questions or would like to collaborate, please reach out to:</p>
-    <p><strong>Email:</strong> <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+    <h2>Contact Us</h2>
+    <form action="mailto:you@example.com" method="post" enctype="text/plain">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br>
+        <label for="message">Message:</label><br>
+        <textarea id="message" name="message" rows="4" required></textarea><br>
+        <input type="submit" value="Send">
+    </form>
 </section>
 
 <footer>
-    <p>&copy; 2024 Your Name. All rights reserved.</p>
+    <p>&copy; 2024 Yang-Baxter and Tetrahedron Equations for Quantum Circuit Design. All rights reserved.</p>
 </footer>
 
 <script>
-    // Toggle between 4x4 and 9x9 YBO buttons
     document.getElementById('btn-4x4').addEventListener('click', function() {
         document.getElementById('sub-buttons-4x4').classList.remove('hidden');
         document.getElementById('sub-buttons-9x9').classList.add('hidden');
     });
 
     document.getElementById('btn-9x9').addEventListener('click', function() {
-        document.getElementById('sub-buttons-4x4').classList.add('hidden');
         document.getElementById('sub-buttons-9x9').classList.remove('hidden');
+        document.getElementById('sub-buttons-4x4').classList.add('hidden');
     });
 
-   // Matrix Data for 4x4 and 9x9 Matrices
-const matrixData = {
-    'H3-1': {
-        matrix: [['k', 0, 0, 0], [0, 0, 'p', 0], [0, 'q', 0, 0], [0, 0, 0, 's']],
-        eigenvalues: ['k, -&radic;p &radic;q, &radic;p &radic;q, s'] // Placeholder for eigenvalues
-    },
-    'H2-1': {
-        matrix: [['k^2', 0, 0, 0], [0, 'k^2 - p * q', 'k * p', 0], [0, 'k * q', 0, 0], [0, 0, 0, 'k^2']],
-        eigenvalues: ['k^2,k^2,k^2,-p q'] // Placeholder for eigenvalues
-    },
-    'H2-2': {
-        matrix: [['k^2', 0, 0, 0], [0, 'k^2 - p * q', 'k * p', 0], [0, 'k * q', 0, 0], [0, 0, 0, '-p * q']],
-        eigenvalues: ['k^2,k^2,-p q,-p q'] // Placeholder for eigenvalues
-    },
-    'H2-3': {
-        matrix: [['k', 'p', 'q', 's'], [0, 0, 'k', 'p'], [0, 'k', 0, 'q'], [0, 0, 0, 'k']],
-        eigenvalues: ['-k,k,k,k'] // Placeholder for eigenvalues
-    },
-    'H1-1': {
-        matrix: [['p^2 + 2 * p * q - q^2', 0, 0, 'p^2 - q^2'], [0, 'p^2 - q^2', 'p^2 + q^2', 0], [0, 'p^2 + q^2', 'p^2 - q^2', 0], ['p^2 - q^2', 0, 0, 'p^2 - 2 * p * q - q^2']],
-        eigenvalues: ['2 p^2,2 p^2,-2 q^2,-2 q^2'] // Placeholder for eigenvalues
-    },
-    'H1-2': {
-        matrix: [['p', 0, 0, 'k'], [0, 'p - q', 'p', 0], [0, 'q', 0, 0], [0, 0, 0, '-q']],
-        eigenvalues: ['p,p,-q,-q'] // Placeholder for eigenvalues
-    },
-    'H1-3': {
-        matrix: [['k^2', '-k * p', 'k * p', 'p * q'], [0, 0, 'k^2', 'k * q'], [0, 'k^2', 0, '-k * q'], [0, 0, 0, 'k^2']],
-        eigenvalues: ['-k^2,k^2,k^2,k^2'] // Placeholder for eigenvalues
-    },
-    'H1-4': {
-        matrix: [[0, 0, 0, 'p'], [0, 'k', 0, 0], [0, 0, 'k', 0], ['q', 0, 0, 0]],
-        eigenvalues: ['k, k,-&radic;p &radic;q, &radic;p &radic;q'] // Placeholder for eigenvalues
-    },
-    'H0-1': {
-        matrix: [[1, 0, 0, 1], [0, 0, -1, 0], [0, -1, 0, 0], [0, 0, 0, 1]],
-        eigenvalues: ['-1,1,1,1'] // Placeholder for eigenvalues
-    },
-    'H0-2': {
-        matrix: [[1, 0, 0, 1], [0, 1, 1, 0], [0, -1, 1, 0], [-1, 0, 0, 1]],
-        eigenvalues: ['1 + i, 1 + i, 1 - i, 1 - i'] // Placeholder for eigenvalues
-    },
-    'H9-1': {
-        matrix: [
-            ['1', 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 'p', 0, 0, '1 - q*η²', 0, 0, 0, 0],
-            [0, 0, 'p²', 0, 0, '(1 - q*η)*x', 0, '(1 - q*η)*(1 - q*η²)', 0],
-            [0, 0, 0, 'q*p⁻¹*η²', 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 'q*η', 0, 0, '-q*(1 - q*η²)/x', 0],
-            [0, 0, 0, 0, 0, 'q*p', 0, 0, '-η²*q*(1 - q*η)'],
-            [0, 0, 0, 0, 0, 0, 'q²*p⁻²*η', 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 'q²*p⁻¹*η²', 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 'q²']
-        ],
-        eigenvalues: ['eigenvalues for H9-1'] // Placeholder for eigenvalues
-    },
-    'H8-1': {
-        matrix: [
-            ['1', 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 'p', 0, '1 - q', 0, 0, 0, 0, 0],
-            [0, 0, 'c', 0, 0, 0, '1 - q', 0, 0],
-            [0, 0, 0, 'q*p⁻¹', 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 'A', 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 'q*k⁻¹', 0, '1 - q', 0],
-            [0, 0, 0, 0, 0, 0, 'q*c⁻¹', 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 'k', 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 'B']
-        ],
-        eigenvalues: ['eigenvalues for H8-1'] // Placeholder for eigenvalues
-    }
-};
+    const buttons = document.querySelectorAll('.ybo-button');
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            const yboType = this.getAttribute('data-ybo');
+            
+            // Example matrix and eigenvalues data
+            const matrices = {
+                'H3-1': [
+                    [1, 0, 0, 0],
+                    [0, 1, 0, 0],
+                    [0, 0, 1, 0],
+                    [0, 0, 0, 1]
+                ],
+                'H2-1': [
+                    [1, 0, 0, 0],
+                    [0, -1, 0, 0],
+                    [0, 0, 1, 0],
+                    [0, 0, 0, -1]
+                ],
+                // Add more matrices as needed
+            };
 
-// Function to display matrix in HTML table format
-function displayMatrix(matrix) {
-    let tableHtml = '<table><tbody>';
-    matrix.forEach(row => {
-        tableHtml += '<tr>' + row.map(cell => `<td>${cell}</td>`).join('') + '</tr>';
+            const eigenvalues = {
+                'H3-1': [1, 1, 1, 1],
+                'H2-1': [1, -1, 1, -1],
+                // Add more eigenvalues as needed
+            };
+
+            const matrix = matrices[yboType] || [];
+            const eigenvalueList = eigenvalues[yboType] || [];
+
+            // Display matrix
+            let matrixHtml = '<table>';
+            matrix.forEach(row => {
+                matrixHtml += '<tr>';
+                row.forEach(cell => {
+                    matrixHtml += `<td>${cell}</td>`;
+                });
+                matrixHtml += '</tr>';
+            });
+            matrixHtml += '</table>';
+            document.getElementById('matrix-display').innerHTML = matrixHtml;
+
+            // Display eigenvalues
+            document.getElementById('eigenvalues-display').innerHTML = eigenvalueList.join(', ');
+        });
     });
-    tableHtml += '</tbody></table>';
-    return tableHtml;
-}
-
-// Function to display eigenvalues in HTML list format
-function displayEigenvalues(eigenvalues) {
-    return '<ul>' + eigenvalues.map(val => `<li>${val}</li>`).join('') + '</ul>';
-}
-
-// Populate Matrix and Eigenvalues on YBO Button Click
-const yboButtons = document.querySelectorAll('.ybo-button');
-yboButtons.forEach(button => {
-    button.addEventListener('click', function() {
-        const ybo = this.getAttribute('data-ybo');
-        const matrix = matrixData[ybo]?.matrix || 'Matrix not available';
-        const eigenvalues = matrixData[ybo]?.eigenvalues || 'Eigenvalues not available';
-
-        document.getElementById('matrix-display').innerHTML = typeof matrix === 'string' ? matrix : displayMatrix(matrix);
-        document.getElementById('eigenvalues-display').innerHTML = typeof eigenvalues === 'string' ? eigenvalues : displayEigenvalues(eigenvalues);
-    });
-});
-
 </script>
 </body>
-
-
-</body>
-    <div class="container">
-        <h2>Matrix Commute / Anti-Commute Checker</h2>
-
-        <div class="input-field">
-            <label for="matrixA">Matrix A (comma-separated values):</label>
-            <input type="text" id="matrixA" placeholder="e.g. 1,1,1,-1">
-        </div>
-
-        <div class="input-field">
-            <label for="matrixB">Matrix B (comma-separated values):</label>
-            <input type="text" id="matrixB" placeholder="e.g. 0,1,1,0">
-        </div>
-
-        <button onclick="checkCommute()">Check Commute</button>
-        <button onclick="checkAntiCommute()">Check Anti-Commute</button>
-
-        <div class="result" id="result"></div>
-    </div>
-
-    <script>
-        function parseMatrix(input) {
-            const values = input.split(',').map(Number);
-            return [
-                [values[0], values[1]],
-                [values[2], values[3]]
-            ];
-        }
-
-        function matrixMultiply(A, B) {
-            return [
-                [A[0][0] * B[0][0] + A[0][1] * B[1][0], A[0][0] * B[0][1] + A[0][1] * B[1][1]],
-                [A[1][0] * B[0][0] + A[1][1] * B[1][0], A[1][0] * B[0][1] + A[1][1] * B[1][1]]
-            ];
-        }
-
-        function matrixSubtract(A, B) {
-            return [
-                [A[0][0] - B[0][0], A[0][1] - B[0][1]],
-                [A[1][0] - B[1][0], A[1][1] - B[1][1]]
-            ];
-        }
-
-        function matrixEqual(A, B) {
-            return A.flat().every((value, index) => value === B.flat()[index]);
-        }
-
-        function checkCommute() {
-            let matrixA = parseMatrix(document.getElementById("matrixA").value.trim());
-            let matrixB = parseMatrix(document.getElementById("matrixB").value.trim());
-
-            let AB = matrixMultiply(matrixA, matrixB);
-            let BA = matrixMultiply(matrixB, matrixA);
-
-            if (matrixEqual(AB, BA)) {
-                document.getElementById("result").innerHTML = "The matrices commute.";
-            } else {
-                document.getElementById("result").innerHTML = "The matrices do not commute.";
-            }
-        }
-
-        function checkAntiCommute() {
-            let matrixA = parseMatrix(document.getElementById("matrixA").value.trim());
-            let matrixB = parseMatrix(document.getElementById("matrixB").value.trim());
-
-            let AB = matrixMultiply(matrixA, matrixB);
-            let BA = matrixMultiply(matrixB, matrixA);
-            let negBA = matrixSubtract([[0,0],[0,0]], BA); // Negation of BA
-
-            if (matrixEqual(AB, negBA)) {
-                document.getElementById("result").innerHTML = "The matrices anti-commute.";
-            } else {
-                document.getElementById("result").innerHTML = "The matrices do not anti-commute.";
-            }
-        }
-    </script>
-
-</body>
-</html>
-
 </html>
