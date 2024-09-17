@@ -349,35 +349,51 @@ yboButtons.forEach(button => {
 </script>
 </body>
 
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Commute/Anti-Commute Checker</title>
+    <title>Matrix Commute/Anti-Commute Checker</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
         }
         .container {
-            max-width: 500px;
+            max-width: 600px;
             margin: 0 auto;
-            padding: 10px;
+            padding: 20px;
             border: 1px solid #ddd;
             border-radius: 5px;
         }
+        h2 {
+            text-align: center;
+        }
         .input-field {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         label {
+            display: block;
+            margin-bottom: 5px;
             font-weight: bold;
         }
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
         button {
+            display: block;
+            width: 100%;
             background-color: #4CAF50;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 10px;
             border-radius: 5px;
             cursor: pointer;
+            margin-top: 10px;
         }
         button:hover {
             background-color: #45a049;
@@ -386,22 +402,23 @@ yboButtons.forEach(button => {
             margin-top: 20px;
             font-size: 18px;
             font-weight: bold;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h2>Commute / Anti-Commute Checker</h2>
+        <h2>Matrix Commute / Anti-Commute Checker</h2>
 
         <div class="input-field">
-            <label for="operatorA">Operator A:</label>
-            <input type="text" id="operatorA" placeholder="Enter operator A (e.g. AB - BA)">
+            <label for="matrixA">Matrix A (comma-separated values):</label>
+            <input type="text" id="matrixA" placeholder="e.g. 1,1,1,-1">
         </div>
 
         <div class="input-field">
-            <label for="operatorB">Operator B:</label>
-            <input type="text" id="operatorB" placeholder="Enter operator B (e.g. A * B)">
+            <label for="matrixB">Matrix B (comma-separated values):</label>
+            <input type="text" id="matrixB" placeholder="e.g. 0,1,1,0">
         </div>
 
         <button onclick="checkCommute()">Check Commute</button>
@@ -411,30 +428,63 @@ yboButtons.forEach(button => {
     </div>
 
     <script>
-        function checkCommute() {
-            let operatorA = document.getElementById("operatorA").value;
-            let operatorB = document.getElementById("operatorB").value;
+        function parseMatrix(input) {
+            const values = input.split(',').map(Number);
+            return [
+                [values[0], values[1]],
+                [values[2], values[3]]
+            ];
+        }
 
-            // Define logic for commute check (for simplicity, just checking if inputs are identical)
-            if (operatorA === operatorB) {
-                document.getElementById("result").innerHTML = "The operators commute.";
+        function matrixMultiply(A, B) {
+            return [
+                [A[0][0] * B[0][0] + A[0][1] * B[1][0], A[0][0] * B[0][1] + A[0][1] * B[1][1]],
+                [A[1][0] * B[0][0] + A[1][1] * B[1][0], A[1][0] * B[0][1] + A[1][1] * B[1][1]]
+            ];
+        }
+
+        function matrixSubtract(A, B) {
+            return [
+                [A[0][0] - B[0][0], A[0][1] - B[0][1]],
+                [A[1][0] - B[1][0], A[1][1] - B[1][1]]
+            ];
+        }
+
+        function matrixEqual(A, B) {
+            return A.flat().every((value, index) => value === B.flat()[index]);
+        }
+
+        function checkCommute() {
+            let matrixA = parseMatrix(document.getElementById("matrixA").value.trim());
+            let matrixB = parseMatrix(document.getElementById("matrixB").value.trim());
+
+            let AB = matrixMultiply(matrixA, matrixB);
+            let BA = matrixMultiply(matrixB, matrixA);
+
+            if (matrixEqual(AB, BA)) {
+                document.getElementById("result").innerHTML = "The matrices commute.";
             } else {
-                document.getElementById("result").innerHTML = "The operators do not commute.";
+                document.getElementById("result").innerHTML = "The matrices do not commute.";
             }
         }
 
         function checkAntiCommute() {
-            let operatorA = document.getElementById("operatorA").value;
-            let operatorB = document.getElementById("operatorB").value;
+            let matrixA = parseMatrix(document.getElementById("matrixA").value.trim());
+            let matrixB = parseMatrix(document.getElementById("matrixB").value.trim());
 
-            // Define logic for anti-commute check (for simplicity, just checking negation)
-            if (operatorA === "-" + operatorB || operatorB === "-" + operatorA) {
-                document.getElementById("result").innerHTML = "The operators anti-commute.";
+            let AB = matrixMultiply(matrixA, matrixB);
+            let BA = matrixMultiply(matrixB, matrixA);
+            let negBA = matrixSubtract([[0,0],[0,0]], BA); // Negation of BA
+
+            if (matrixEqual(AB, negBA)) {
+                document.getElementById("result").innerHTML = "The matrices anti-commute.";
             } else {
-                document.getElementById("result").innerHTML = "The operators do not anti-commute.";
+                document.getElementById("result").innerHTML = "The matrices do not anti-commute.";
             }
         }
     </script>
 
 </body>
+</html>
+
 </html>
