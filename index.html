@@ -76,7 +76,7 @@
     <header>
                 <img id="cqts-logo" src="" alt="CQTS Logo">
 
-     <h1 id="Yang-Baxter-and-Tetrahedron-Equations-for-Quantum-Circuit-Design</h1>
+     <h1 id="Yang-Baxter-and-Tetrahedron-Equations-for-Quantum-Circuit-Design"</h1>
         <p class="small-text">The website for combine two important theoretical developments : integrable
 models (low and higher dimensions) and the rapidly growing field of quantum computation (currently under development!)</p>
     </header>
@@ -96,10 +96,12 @@ models (low and higher dimensions) and the rapidly growing field of quantum comp
       <section id="home">
         <h2>About Yang-Baxter operators</h2>
         <p>Yang-Baxter and 2-simplex operators play a key role in both Physics and Mathematics, with applications in quantum systems, knot theory, and quantum computation. Their higher-dimensional counterparts, n-simplex operators, extend these uses and are gaining importance. This website offers a comprehensive update on the latest advancements in this field..</p>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Constant 4x4 YBO’s Viewer</title>
+    <title>YBO Matrix and Eigenvalues Viewer</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -112,143 +114,114 @@ models (low and higher dimensions) and the rapidly growing field of quantum comp
             padding: 10px;
             margin-top: 10px;
             background-color: #f9f9f9;
-            white-space: pre-wrap; /* To preserve whitespace and line breaks */
+            white-space: pre-wrap;
         }
         button {
             margin: 5px;
-            padding: 8px 12px;
+            padding: 10px;
             cursor: pointer;
             color: white;
             border: none;
             border-radius: 4px;
+            display: inline-block;
         }
-        .H3,1 { background-color: #ff4d4d; }
-        .H2,1 { background-color: #4dff4d; }
-        .H2,2 { background-color: #4d4dff; }
-        .H2,3 { background-color: #ffcc4d; }
-        .H1,1 { background-color: #ff4d8c; }
-        .H1,2 { background-color: #4dff8c; }
-        .H1,3 { background-color: #8c4dff; }
-        .H1,4 { background-color: #ff8c4d; }
-        .H0,1 { background-color: #4d8cff; }
-        .H0,2 { background-color: #8cff4d; }
-        .knot-group {
+        .ybo-type-btn {
+            background-color: #4CAF50;
+        }
+        .ybo-group {
+            margin-top: 10px;
             display: flex;
             flex-wrap: wrap;
         }
-        .knot-group button {
-            width: 60px;
-            height: 60px;
-            font-size: 16px;
-            margin: 5px;
-            text-align: center;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .ybo-button {
+            width: 100px;
+            background-color: #4CAF50;
+        }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <h1>4x4 Matrix and Eigenvalues Viewer</h1>
-    
-    <!-- Knot Group Selector -->
-    <label for="knot-group-select">Select Number of Crossings:</label>
-    <select id="knot-group-select">
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-    </select>
 
-    <!-- Knot Selector -->
-    <label for="knot-select">Select a Knot:</label>
-    <select id="knot-select"></select>
+    <h1>YBO Matrix and Eigenvalues Viewer</h1>
 
-    <!-- Buttons to View Matrices by Color -->
-    <h3>View 4x4 Matrices and Eigenvalues by Color:</h3>
-    <button class="color-button color-1" data-color="1">Color 1</button>
-    <button class="color-button color-2" data-color="2">Color 2</button>
-    <button class="color-button color-3" data-color="3">Color 3</button>
-    <button class="color-button color-4" data-color="4">Color 4</button>
-    <button class="color-button color-5" data-color="5">Color 5</button>
-    <button class="color-button color-6" data-color="6">Color 6</button>
-    <button class="color-button color-7" data-color="7">Color 7</button>
-    <button class="color-button color-8" data-color="8">Color 8</button>
-    <button class="color-button color-9" data-color="9">Color 9</button>
-    <button class="color-button color-10" data-color="10">Color 10</button>
+    <!-- Buttons to Choose Between 4x4 and 9x9 YBOs -->
+    <div id="ybo-type-buttons">
+        <button class="ybo-type-btn" id="btn-4x4">4x4 YBO's</button>
+        <button class="ybo-type-btn" id="btn-9x9">9x9 YBO's</button>
+    </div>
+
+    <!-- Display for 4x4 YBO Buttons -->
+    <div id="sub-buttons-4x4" class="ybo-group hidden">
+        <button class="ybo-button" data-ybo="H3-1">H3,1</button>
+        <button class="ybo-button" data-ybo="H2-1">H2,1</button>
+        <button class="ybo-button" data-ybo="H2-2">H2,2</button>
+        <button class="ybo-button" data-ybo="H2-3">H2,3</button>
+        <button class="ybo-button" data-ybo="H1-1">H1,1</button>
+        <button class="ybo-button" data-ybo="H1-2">H1,2</button>
+        <button class="ybo-button" data-ybo="H1-3">H1,3</button>
+        <button class="ybo-button" data-ybo="H1-4">H1,4</button>
+        <button class="ybo-button" data-ybo="H0-1">H0,1</button>
+        <button class="ybo-button" data-ybo="H0-2">H0,2</button>
+    </div>
+
+    <!-- Display for 9x9 YBO Buttons -->
+    <div id="sub-buttons-9x9" class="ybo-group hidden">
+        <button class="ybo-button" data-ybo="H9-1">H9,1</button>
+        <button class="ybo-button" data-ybo="H9-2">H9,2</button>
+        <button class="ybo-button" data-ybo="H9-3">H9,3</button>
+        <button class="ybo-button" data-ybo="H9-4">H9,4</button>
+        <!-- Continue to add 35 buttons... -->
+        <button class="ybo-button" data-ybo="H9-35">H9,35</button>
+    </div>
 
     <!-- Display Areas for Matrices and Eigenvalues -->
-    <h3>4x4 Matrix:</h3>
-    <div id="matrix-display">Select a knot and color to see the 4x4 matrix.</div>
+    <h3>Matrix:</h3>
+    <div id="matrix-display">Click a YBO button to view the matrix.</div>
     
     <h3>Eigenvalues:</h3>
-    <div id="eigenvalues-display">Select a knot and color to see the eigenvalues.</div>
+    <div id="eigenvalues-display">Click a YBO button to view the eigenvalues.</div>
 
     <script>
-        // Knot Data
-        const knotData = {
-            '3': Array.from({ length: 1 }, (_, i) => `3_${i + 1}`),
-            '4': Array.from({ length: 1 }, (_, i) => `4_${i + 1}`),
-            '5': Array.from({ length: 2 }, (_, i) => `5_${i + 1}`),
-            '6': Array.from({ length: 3 }, (_, i) => `6_${i + 1}`),
-            '7': Array.from({ length: 7 }, (_, i) => `7_${i + 1}`),
-            '8': Array.from({ length: 21 }, (_, i) => `8_${i + 1}`),
-            '9': Array.from({ length: 49 }, (_, i) => `9_${i + 1}`),
-            '10': Array.from({ length: 165 }, (_, i) => `10_${i + 1}`)
-        };
+        // Show 4x4 or 9x9 YBO Buttons on Click
+        document.getElementById('btn-4x4').addEventListener('click', function() {
+            document.getElementById('sub-buttons-4x4').classList.remove('hidden');
+            document.getElementById('sub-buttons-9x9').classList.add('hidden');
+        });
 
-        // Matrix Data
+        document.getElementById('btn-9x9').addEventListener('click', function() {
+            document.getElementById('sub-buttons-4x4').classList.add('hidden');
+            document.getElementById('sub-buttons-9x9').classList.remove('hidden');
+        });
+
+        // Matrix Data for 4x4 and 9x9 Matrices
         const matrixData = {
-            '3_1': {
-                '1': [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]],
-                '2': [[2, 3, 4, 5], [6, 7, 8, 9], [10, 11, 12, 13], [14, 15, 16, 17]],
-                '3': [[3, 4, 5, 6], [7, 8, 9, 10], [11, 12, 13, 14], [15, 16, 17, 18]]
+            'H3-1': {
+                matrix: [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]],
+                eigenvalues: [1, 2, 3, 4] // Placeholder for 4x4
+            },
+            'H2-1': {
+                matrix: [[3, 2, 1, 0], [0, 1, 2, 3], [1, 0, 3, 2], [2, 3, 1, 0]],
+                eigenvalues: [4, 3, 2, 1] // Placeholder for 4x4
+            },
+            // Add more YBOs and their respective matrices and eigenvalues here...
+            'H9-1': {
+                matrix: Array(9).fill().map(() => Array(9).fill(1)), // Placeholder for 9x9
+                eigenvalues: Array(9).fill(1) // Placeholder for 9x9
             }
-            // Add more knots and their matrices here as needed
+            // Continue adding more matrices for the 9x9 YBOs...
         };
 
-        // Function to calculate eigenvalues (placeholder logic)
-        function calculateEigenvalues(matrix) {
-            // Placeholder: Replace this with actual eigenvalue calculation logic
-            const eigenvalues = [1, 2, 3, 4]; // Dummy eigenvalues
-            return eigenvalues;
-        }
-
-        // Populate Knot Selector based on group selection
-        const knotGroupSelect = document.getElementById('knot-group-select');
-        const knotSelect = document.getElementById('knot-select');
-
-        function populateKnots() {
-            const selectedGroup = knotGroupSelect.value;
-            const knots = knotData[selectedGroup] || [];
-            knotSelect.innerHTML = '';
-            knots.forEach(knot => {
-                const option = document.createElement('option');
-                option.value = knot;
-                option.textContent = knot;
-                knotSelect.appendChild(option);
-            });
-        }
-
-        knotGroupSelect.addEventListener('change', populateKnots);
-        populateKnots(); // Populate on page load
-
-        // Handle color button clicks
-        const colorButtons = document.querySelectorAll('.color-button');
-        colorButtons.forEach(button => {
+        // Populate Matrix and Eigenvalues on YBO Button Click
+        const yboButtons = document.querySelectorAll('.ybo-button');
+        yboButtons.forEach(button => {
             button.addEventListener('click', function() {
-                const color = this.getAttribute('data-color');
-                const knot = knotSelect.value;
-                const matrix = matrixData[knot]?.[color] || 'Matrix not available';
-                document.getElementById('matrix-display').textContent = matrix.toString();
+                const ybo = this.getAttribute('data-ybo');
+                const matrix = matrixData[ybo]?.matrix || 'Matrix not available';
+                const eigenvalues = matrixData[ybo]?.eigenvalues || 'Eigenvalues not available';
 
-                // Calculate eigenvalues
-                const eigenvalues = Array.isArray(matrix) ? calculateEigenvalues(matrix) : 'Eigenvalues not available';
+                document.getElementById('matrix-display').textContent = JSON.stringify(matrix, null, 2);
                 document.getElementById('eigenvalues-display').textContent = eigenvalues.toString();
             });
         });
