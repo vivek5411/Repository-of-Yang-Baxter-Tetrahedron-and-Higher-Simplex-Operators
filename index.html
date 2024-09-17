@@ -348,4 +348,93 @@ yboButtons.forEach(button => {
 
 </script>
 </body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commute/Anti-Commute Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .input-field {
+            margin-bottom: 10px;
+        }
+        label {
+            font-weight: bold;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Commute / Anti-Commute Checker</h2>
+
+        <div class="input-field">
+            <label for="operatorA">Operator A:</label>
+            <input type="text" id="operatorA" placeholder="Enter operator A (e.g. AB - BA)">
+        </div>
+
+        <div class="input-field">
+            <label for="operatorB">Operator B:</label>
+            <input type="text" id="operatorB" placeholder="Enter operator B (e.g. A * B)">
+        </div>
+
+        <button onclick="checkCommute()">Check Commute</button>
+        <button onclick="checkAntiCommute()">Check Anti-Commute</button>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function checkCommute() {
+            let operatorA = document.getElementById("operatorA").value;
+            let operatorB = document.getElementById("operatorB").value;
+
+            // Define logic for commute check (for simplicity, just checking if inputs are identical)
+            if (operatorA === operatorB) {
+                document.getElementById("result").innerHTML = "The operators commute.";
+            } else {
+                document.getElementById("result").innerHTML = "The operators do not commute.";
+            }
+        }
+
+        function checkAntiCommute() {
+            let operatorA = document.getElementById("operatorA").value;
+            let operatorB = document.getElementById("operatorB").value;
+
+            // Define logic for anti-commute check (for simplicity, just checking negation)
+            if (operatorA === "-" + operatorB || operatorB === "-" + operatorA) {
+                document.getElementById("result").innerHTML = "The operators anti-commute.";
+            } else {
+                document.getElementById("result").innerHTML = "The operators do not anti-commute.";
+            }
+        }
+    </script>
+
+</body>
 </html>
