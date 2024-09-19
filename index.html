@@ -151,25 +151,7 @@
         </div>
     </section>
 
-    <script>
-        // Get the buttons and sections
-        const btn4x4 = document.getElementById('btn-4x4');
-        const btn9x9 = document.getElementById('btn-9x9');
-        const subButtons4x4 = document.getElementById('sub-buttons-4x4');
-        const subButtons9x9 = document.getElementById('sub-buttons-9x9');
-        const matrixDisplay = document.getElementById('matrix-display');
-        const eigenvaluesDisplay = document.getElementById('eigenvalues-display');
-
-        // Event listeners for showing/hiding YBO groups
-        btn4x4.addEventListener('click', () => {
-            subButtons4x4.classList.add('active');
-            subButtons9x9.classList.remove('active');
-        });
-
-        btn9x9.addEventListener('click', () => {
-            subButtons9x9.classList.add('active');
-            subButtons4x4.classList.remove('active');
-        });
+  
 <section id="projects">
     <!-- Content for Research & Projects -->
 </section>
@@ -224,7 +206,25 @@ Stony Brook University, New York, USA </p>
     <p>&copy; 2024 Repository of Yang-Baxter, Tetrahedron and Higher Simplex Operators. All rights reserved.</p>
 </footer>
 
+  <script>
+        // Get the buttons and sections
+        const btn4x4 = document.getElementById('btn-4x4');
+        const btn9x9 = document.getElementById('btn-9x9');
+        const subButtons4x4 = document.getElementById('sub-buttons-4x4');
+        const subButtons9x9 = document.getElementById('sub-buttons-9x9');
+        const matrixDisplay = document.getElementById('matrix-display');
+        const eigenvaluesDisplay = document.getElementById('eigenvalues-display');
 
+        // Event listeners for showing/hiding YBO groups
+        btn4x4.addEventListener('click', () => {
+            subButtons4x4.classList.add('active');
+            subButtons9x9.classList.remove('active');
+        });
+
+        btn9x9.addEventListener('click', () => {
+            subButtons9x9.classList.add('active');
+            subButtons4x4.classList.remove('active');
+        });
 
     const buttons = document.querySelectorAll('.ybo-button');
     buttons.forEach(button => {
