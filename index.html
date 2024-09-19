@@ -149,7 +149,7 @@
     <p>Yang-Baxter and 2-simplex operators play a key role in both Physics and Mathematics, with applications in quantum systems, knot theory, and quantum computation. Their higher-dimensional counterparts, n-simplex operators, extend these uses and are gaining importance. This website offers a comprehensive update on the latest advancements in this field.</p>
 </section>
 
-<section id="ybos">
+x<section id="ybos">
     <h2>YBO Matrix and Eigenvalues Viewer</h2>
 
     <!-- Buttons to Choose Between 4x4 and 9x9 YBOs -->
@@ -159,7 +159,7 @@
     </div>
 
     <!-- Display for 4x4 YBO Buttons -->
-    <div id="sub-buttons-4x4" class="ybo-group active">
+    <div id="sub-buttons-4x4" class="ybo-group active" style="display: flex; flex-wrap: wrap;">
         <button class="ybo-button" data-ybo="H3-1">H3,1</button>
         <button class="ybo-button" data-ybo="H2-1">H2,1</button>
         <button class="ybo-button" data-ybo="H2-2">H2,2</button>
@@ -174,7 +174,7 @@
     </div>
 
     <!-- Display for 9x9 YBO Buttons -->
-    <div id="sub-buttons-9x9" class="ybo-group">
+    <div id="sub-buttons-9x9" class="ybo-group" style="display: none;">
         <button class="ybo-button" data-ybo="H9-1">H9,1</button>
         <button class="ybo-button" data-ybo="H8-1">H8,1</button>
         <button class="ybo-button" data-ybo="H8-2">H8,2</button>
@@ -202,37 +202,20 @@
     </div>
 </section>
 
-<section id="projects">
-    <!-- Content for Research & Projects -->
-</section>
-<section id="thos">
-    <!-- Content for Tetrahedron Operators -->
-</section>
-<section id="hsos">
-    <!-- Content for Higher Simplex Operators -->
-</section>
-<section id="team-members">
-    <!-- Content for Team Members -->
-</section>
-<section id="citation">
-    <!-- Content for Citation -->
-</section>
-
 <script>
     // JavaScript to handle button clicks and display matrices/eigenvalues
     document.getElementById('btn-4x4').addEventListener('click', function() {
-        document.getElementById('sub-buttons-4x4').classList.add('active');
-        document.getElementById('sub-buttons-9x9').classList.remove('active');
+        document.getElementById('sub-buttons-4x4').style.display = 'flex';
+        document.getElementById('sub-buttons-9x9').style.display = 'none';
     });
 
     document.getElementById('btn-9x9').addEventListener('click', function() {
-        document.getElementById('sub-buttons-9x9').classList.add('active');
-        document.getElementById('sub-buttons-4x4').classList.remove('active');
+        document.getElementById('sub-buttons-9x9').style.display = 'flex';
+        document.getElementById('sub-buttons-4x4').style.display = 'none';
     });
 
-    // Event listeners for YBO buttons
-      // Matrix and eigenvalues data
-       const matrices = {
+    // Define matrix and eigenvalues data
+    const matrices = {
             'H3-1': [
                 ['k', 0, 0, 0],
                 [0, 0, 'p', 0],
@@ -331,15 +314,16 @@
             'H9-1': ['eigenvalues for H9-1'], // Placeholder
             'H8-1': ['eigenvalues for H8-1']  // Placeholder
         };
-// Event listeners for YBO buttons
+    // Event listeners for YBO buttons
     document.querySelectorAll('.ybo-button').forEach(button => {
         button.addEventListener('click', function() {
             const ybo = this.getAttribute('data-ybo');
-            // Fetch and display matrix and eigenvalues based on selected YBO
-            const data = yboData[ybo];
-            if (data) {
-                document.getElementById('matrix-display').innerHTML = `<pre>${data.matrix}</pre>`;
-                document.getElementById('eigenvalues-display').innerHTML = `<pre>${data.eigenvalues}</pre>`;
+            const matrixData = matrices[ybo];
+            const eigenvalueData = eigenvalues[ybo];
+
+            if (matrixData && eigenvalueData) {
+                document.getElementById('matrix-display').innerHTML = `<pre>${JSON.stringify(matrixData, null, 2)}</pre>`;
+                document.getElementById('eigenvalues-display').innerHTML = `<pre>${JSON.stringify(eigenvalueData, null, 2)}</pre>`;
             } else {
                 document.getElementById('matrix-display').innerHTML = `<p>No data available for ${ybo}.</p>`;
                 document.getElementById('eigenvalues-display').innerHTML = `<p>No data available.</p>`;
