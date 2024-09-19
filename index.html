@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yang-Baxter, Tetrahedron and Higher Simplex Operators</title>
-      <style>
+    <style>
         /* Apply a modern, dynamic background using gradients */
         body {
             background: linear-gradient(120deg, #ff9a9e, #fad0c4, #fcb69f);
@@ -19,15 +19,9 @@
 
         /* Create a smooth, shifting gradient animation */
         @keyframes gradientAnimation {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* Container for the horizontal sections */
@@ -51,17 +45,9 @@
             padding: 20px;
         }
 
-        #section1 {
-            background-color: rgba(255, 100, 100, 0.8);
-        }
-
-        #section2 {
-            background-color: rgba(100, 150, 255, 0.8);
-        }
-
-        #section3 {
-            background-color: rgba(100, 255, 150, 0.8);
-        }
+        #section1 { background-color: rgba(255, 100, 100, 0.8); }
+        #section2 { background-color: rgba(100, 150, 255, 0.8); }
+        #section3 { background-color: rgba(100, 255, 150, 0.8); }
 
         /* Navigation buttons */
         .nav-btns {
@@ -86,22 +72,73 @@
             background-color: #ff9a9e;
             color: white;
         }
+
+        /* YBO buttons */
+        #ybo-type-buttons {
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .ybo-type-btn, .ybo-button {
+            padding: 10px 15px;
+            margin: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .ybo-type-btn:hover, .ybo-button:hover {
+            background-color: rgba(255, 100, 100, 0.8);
+            color: white;
+        }
+
+        .ybo-group {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .active {
+            display: flex;
+        }
+
+        /* Display areas for matrices and eigenvalues */
+        #matrix-display, #eigenvalues-display {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid white;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        table {
+            margin: auto;
+            border-collapse: collapse;
+        }
+
+        table td {
+            border: 1px solid white;
+            padding: 10px;
+            text-align: center;
+            color: black;
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <h1 id="Repository of Yang-Baxter, Tetrahedron and Higher Simplex Operators">Repository of Yang-Baxter, Tetrahedron and Higher Simplex Operators</h1>
-    <p class="small-text">This website combines two important theoretical developments: integrable models (in both low and higher dimensions) and the rapidly growing field of quantum computation (currently under development!).</p>
+    <h1>Repository of Yang-Baxter, Tetrahedron and Higher Simplex Operators</h1>
+    <p>This website combines two important theoretical developments: integrable models (in both low and higher dimensions) and the rapidly growing field of quantum computation (currently under development!).</p>
 </header>
 
 <nav>
     <ul>
         <li><a href="#home">Home</a></li>
         <li><a href="#ybos">Yang-Baxter Operators</a></li>
-            <li><a href="#thos">Tetrahedron Operators </a></li>
-            <li><a href="#hsos">Higher Simplex Operators </a></li>
-         <li><a href="#projects">Research & Projects</a></li>
+        <li><a href="#thos">Tetrahedron Operators</a></li>
+        <li><a href="#hsos">Higher Simplex Operators</a></li>
+        <li><a href="#projects">Research & Projects</a></li>
         <li><a href="#team-members">Team Members</a></li>
         <li><a href="#citation">Citation</a></li>
     </ul>
@@ -112,18 +149,18 @@
     <p>Yang-Baxter and 2-simplex operators play a key role in both Physics and Mathematics, with applications in quantum systems, knot theory, and quantum computation. Their higher-dimensional counterparts, n-simplex operators, extend these uses and are gaining importance. This website offers a comprehensive update on the latest advancements in this field.</p>
 </section>
 
- <section id="ybos">
-        <h2>YBO Matrix and Eigenvalues Viewer</h2>
+<section id="ybos">
+    <h2>YBO Matrix and Eigenvalues Viewer</h2>
 
-        <!-- Buttons to Choose Between 4x4 and 9x9 YBOs -->
-        <div id="ybo-type-buttons">
-            <button class="ybo-type-btn" id="btn-4x4">4x4 YBOs</button>
-            <button class="ybo-type-btn" id="btn-9x9">9x9 YBOs</button>
-        </div>
+    <!-- Buttons to Choose Between 4x4 and 9x9 YBOs -->
+    <div id="ybo-type-buttons">
+        <button class="ybo-type-btn" id="btn-4x4">4x4 YBOs</button>
+        <button class="ybo-type-btn" id="btn-9x9">9x9 YBOs</button>
+    </div>
 
-        <!-- Display for 4x4 YBO Buttons -->
-        <div id="sub-buttons-4x4" class="ybo-group">
-           <button class="ybo-button" data-ybo="H3-1">H3,1</button>
+    <!-- Display for 4x4 YBO Buttons -->
+    <div id="sub-buttons-4x4" class="ybo-group active">
+        <button class="ybo-button" data-ybo="H3-1">H3,1</button>
         <button class="ybo-button" data-ybo="H2-1">H2,1</button>
         <button class="ybo-button" data-ybo="H2-2">H2,2</button>
         <button class="ybo-button" data-ybo="H2-3">H2,3</button>
@@ -133,12 +170,12 @@
         <button class="ybo-button" data-ybo="H1-4">H1,4</button>
         <button class="ybo-button" data-ybo="H0-1">H0,1</button>
         <button class="ybo-button" data-ybo="H0-2">H0,2</button>
-            <!-- Add more buttons as needed -->
-        </div>
+        <!-- Add more buttons as needed -->
+    </div>
 
-        <!-- Display for 9x9 YBO Buttons -->
-        <div id="sub-buttons-9x9" class="ybo-group">
-           <button class="ybo-button" data-ybo="H9-1">H9,1</button>
+    <!-- Display for 9x9 YBO Buttons -->
+    <div id="sub-buttons-9x9" class="ybo-group">
+        <button class="ybo-button" data-ybo="H9-1">H9,1</button>
         <button class="ybo-button" data-ybo="H8-1">H8,1</button>
         <button class="ybo-button" data-ybo="H8-2">H8,2</button>
         <button class="ybo-button" data-ybo="H8-3">H8,3</button>
@@ -150,97 +187,51 @@
         <button class="ybo-button" data-ybo="H4-2">H4,2</button>
         <button class="ybo-button" data-ybo="H4-3">H4,3</button>
         <button class="ybo-button" data-ybo="H4-4">H4,4</button>
-            <!-- Add more buttons as needed -->
-        </div>
+        <!-- Add more buttons as needed -->
+    </div>
 
-        <!-- Display Areas for Matrices and Eigenvalues -->
-        <h3>Matrix:</h3>
-        <div id="matrix-display">
-            <p>Click a YBO button to view the matrix.</p>
-        </div>
-        
-        <h3>Eigenvalues:</h3>
-        <div id="eigenvalues-display">
-            <p>Click a YBO button to view the eigenvalues.</p>
-        </div>
-    </section>
+    <!-- Display Areas for Matrices and Eigenvalues -->
+    <h3>Matrix:</h3>
+    <div id="matrix-display">
+        <p>Click a YBO button to view the matrix.</p>
+    </div>
 
-  
+    <h3>Eigenvalues:</h3>
+    <div id="eigenvalues-display">
+        <p>Click a YBO button to view the eigenvalues.</p>
+    </div>
+</section>
+
 <section id="projects">
     <!-- Content for Research & Projects -->
 </section>
 <section id="thos">
-    </section>
+    <!-- Content for Tetrahedron Operators -->
+</section>
 <section id="hsos">
-    </section>
+    <!-- Content for Higher Simplex Operators -->
+</section>
 <section id="team-members">
-    <h2>Team Members</h2>
-      <!-- Collaborator 0 -->
-    <div class="team-member">
-        <h3>Prof. Vladimir Korepin </h3>
-        <p><strong>Affiliation:</strong> C. N. Yang Institute for Theoretical Physics,
-Stony Brook University, New York, USA </p>
-        <p class="email"><strong>Email:</strong> <a href="mailto:vladimir.korepin@stonybrook.edu
-">vladimir.korepin@stonybrook.edu</a> </p>
-    </div>
-    <!-- Collaborator 1 -->
-    <div class="team-member">
-        <h3>Prof. Pramod Padmanabhan</h3>
-        <p><strong>Affiliation:</strong> Indian Institute of Technology Bhubaneswar,India</p>
-        <p class="email"><strong>Email:</strong> <a href="mailto:pramod@iitbbs.ac.in">pramod@iitbbs.ac.in</a></p>
-    </div>
-
-    <!-- Collaborator 2 -->
-    <div class="team-member">
-        <h3>Dr. Vivek Kumar Singh</h3>
-        <p><strong>Affiliation:</strong> New York University Abu Dhabi, UAE</p>
-        <p class="email"><strong>Email:</strong> <a href="mailto:vks2024@nyu.edu">vks2024@nyu.edu</a></p>
-    </div>
-
-    <!-- Collaborator 3 -->
-    <div class="team-member">
-        <h3>Somnath Maity </h3>
-        <p><strong>Affiliation:</strong>Indian Institute of Technology Bhubaneswar,India </p>
-        <p class="email"><strong>Email:</strong> <a href="mailto:"></a></p>
-    </div>
-      <!-- Collaborator 4 -->
-    <div class="team-member">
-        <h3>Akash Sinha</h3>
-        <p><strong>Affiliation:</strong> Indian Institute of Technology Bhubaneswar,India</p>
-        <p class="email"><strong>Email:</strong> <a href="mailto:"></a></p>
-    </div>
+    <!-- Content for Team Members -->
 </section>
-
 <section id="citation">
-    <!-- Citation Section Content -->
+    <!-- Content for Citation -->
 </section>
 
+<script>
+    // JavaScript to handle button clicks and display matrices/eigenvalues
+    document.getElementById('btn-4x4').addEventListener('click', function() {
+        document.getElementById('sub-buttons-4x4').classList.add('active');
+        document.getElementById('sub-buttons-9x9').classList.remove('active');
+    });
 
-<footer>
-    <p>&copy; 2024 Repository of Yang-Baxter, Tetrahedron and Higher Simplex Operators. All rights reserved.</p>
-</footer>
+    document.getElementById('btn-9x9').addEventListener('click', function() {
+        document.getElementById('sub-buttons-9x9').classList.add('active');
+        document.getElementById('sub-buttons-4x4').classList.remove('active');
+    });
 
-  <script>
-        // Elements
-        const btn4x4 = document.getElementById('btn-4x4');
-        const btn9x9 = document.getElementById('btn-9x9');
-        const subButtons4x4 = document.getElementById('sub-buttons-4x4');
-        const subButtons9x9 = document.getElementById('sub-buttons-9x9');
-        const matrixDisplay = document.getElementById('matrix-display');
-        const eigenvaluesDisplay = document.getElementById('eigenvalues-display');
-
-        // Toggle visibility of the YBO buttons
-        btn4x4.addEventListener('click', () => {
-            subButtons4x4.classList.add('active');
-            subButtons9x9.classList.remove('active');
-        });
-
-        btn9x9.addEventListener('click', () => {
-            subButtons9x9.classList.add('active');
-            subButtons4x4.classList.remove('active');
-        });
-
-        // Matrix and eigenvalues data
+    // Event listeners for YBO buttons
+      // Matrix and eigenvalues data
        const matrices = {
             'H3-1': [
                 ['k', 0, 0, 0],
@@ -340,32 +331,23 @@ Stony Brook University, New York, USA </p>
             'H9-1': ['eigenvalues for H9-1'], // Placeholder
             'H8-1': ['eigenvalues for H8-1']  // Placeholder
         };
-
-        // Attach event listeners to the YBO buttons
-        document.querySelectorAll('.ybo-button').forEach(button => {
-            button.addEventListener('click', function() {
-                const yboType = this.getAttribute('data-ybo');
-
-                // Get matrix and eigenvalues
-                const matrix = matrices[yboType] || [];
-                const eigenvalueList = eigenvalues[yboType] || [];
-
-                // Display matrix
-                let matrixHtml = '<table>';
-                matrix.forEach(row => {
-                    matrixHtml += '<tr>';
-                    row.forEach(cell => {
-                        matrixHtml += `<td>${cell}</td>`;
-                    });
-                    matrixHtml += '</tr>';
-                });
-                matrixHtml += '</table>';
-                matrixDisplay.innerHTML = matrixHtml;
-
-                // Display eigenvalues
-                eigenvaluesDisplay.innerHTML = eigenvalueList.join(', ');
-            });
+// Event listeners for YBO buttons
+    document.querySelectorAll('.ybo-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const ybo = this.getAttribute('data-ybo');
+            // Fetch and display matrix and eigenvalues based on selected YBO
+            const data = yboData[ybo];
+            if (data) {
+                document.getElementById('matrix-display').innerHTML = `<pre>${data.matrix}</pre>`;
+                document.getElementById('eigenvalues-display').innerHTML = `<pre>${data.eigenvalues}</pre>`;
+            } else {
+                document.getElementById('matrix-display').innerHTML = `<p>No data available for ${ybo}.</p>`;
+                document.getElementById('eigenvalues-display').innerHTML = `<p>No data available.</p>`;
+            }
         });
-    </script>
+    });
+</script>
 </body>
 </html>
+
+
