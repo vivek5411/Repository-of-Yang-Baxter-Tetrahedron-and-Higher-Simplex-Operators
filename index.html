@@ -317,6 +317,7 @@
 
 
     // Event listeners for YBO buttons
+   // Event listeners for YBO buttons
     document.querySelectorAll('.ybo-button').forEach(button => {
         button.addEventListener('click', function() {
             const ybo = this.getAttribute('data-ybo');
@@ -324,8 +325,8 @@
             const eigenvalueData = eigenvalues[ybo];
 
             if (matrixData && eigenvalueData) {
-                // Format matrix for display
-                const matrixDisplay = matrixData.map(row => row.join('\t')).join('\n');
+                // Format matrix for display in parentheses
+                const matrixDisplay = '(' + matrixData.map(row => '(' + row.join(', ') + ')').join(', ') + ')';
                 document.getElementById('matrix-display').innerHTML = `<pre>${matrixDisplay}</pre>`;
 
                 // Format eigenvalues for display
