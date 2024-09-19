@@ -4,44 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yang-Baxter, Tetrahedron and Higher Simplex Operators</title>
-   <style>
+    <style>
+        /* Apply a modern, dynamic background using gradients */
         body {
-            /* Blurred background image with gradient overlay */
-            background: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
+            background: linear-gradient(120deg, #ff9a9e, #fad0c4, #fcb69f);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
             height: 100vh;
-            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Create a smooth, shifting gradient animation */
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Centered container for text with shadow effects */
+        .content {
+            text-align: center;
             color: white;
         }
 
-        /* Gradient overlay */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(255, 99, 71, 0.7), rgba(0, 128, 128, 0.7));
-            z-index: 1;
-            backdrop-filter: blur(10px); /* Add a blur to the background */
-        }
-
         h1 {
-            font-size: 3em;
-            z-index: 2; /* Ensures the text appears above the gradient */
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            font-size: 3rem;
+            margin: 0;
+            padding: 0;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
         }
 
         p {
-            font-size: 1.5em;
-            z-index: 2;
-            text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
+            font-size: 1.5rem;
+            margin: 20px 0;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Add modern button styles */
+        .btn {
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .btn:hover {
+            background: white;
+            color: #ff9a9e;
         }
     </style>
     <style>
