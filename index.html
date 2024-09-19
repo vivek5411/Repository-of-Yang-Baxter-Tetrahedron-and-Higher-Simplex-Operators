@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yang-Baxter, Tetrahedron and Higher Simplex Operators</title>
-    <style>
+      <style>
         /* Apply a modern, dynamic background using gradients */
         body {
             background: linear-gradient(120deg, #ff9a9e, #fad0c4, #fcb69f);
@@ -14,9 +14,7 @@
             margin: 0;
             padding: 0;
             height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            overflow: hidden;
         }
 
         /* Create a smooth, shifting gradient animation */
@@ -32,86 +30,61 @@
             }
         }
 
-        /* Centered container for text with shadow effects */
-        .content {
+        /* Container for the horizontal sections */
+        .horizontal-scroll {
+            display: flex;
+            flex-direction: row;
+            width: 300vw; /* 3 sections of 100vw each */
+            height: 100vh;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .section {
+            width: 100vw;
+            height: 100vh;
             text-align: center;
             color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            padding: 20px;
         }
 
-        h1 {
-            font-size: 3rem;
-            margin: 0;
-            padding: 0;
-            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+        #section1 {
+            background-color: rgba(255, 100, 100, 0.8);
         }
 
-        p {
-            font-size: 1.5rem;
-            margin: 20px 0;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        #section2 {
+            background-color: rgba(100, 150, 255, 0.8);
         }
 
-        /* Add modern button styles */
-        .btn {
-            padding: 15px 30px;
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid white;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: background 0.3s ease, color 0.3s ease;
+        #section3 {
+            background-color: rgba(100, 255, 150, 0.8);
         }
 
-        .btn:hover {
-            background: white;
-            color: #ff9a9e;
-        }
-
-        /* Styles for additional content like table, footer, and buttons */
-        footer {
-            background-color: rgba(0, 0, 0, 0.2);
-            padding: 10px;
-            text-align: center;
+        /* Navigation buttons */
+        .nav-btns {
             position: fixed;
-            bottom: 0;
-            width: 100%;
-            color: white;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
         }
 
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin: 10px 0;
-            color: white;
-        }
-
-        td {
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            padding: 8px;
-            text-align: center;
-        }
-
-        .ybo-type-btn, .ybo-button {
-            background-color: #0044cc; /* Blue background */
-            border: none;
-            color: white; /* White text */
+        .nav-btn {
             padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 5px;
+            background-color: white;
+            color: #ff9a9e;
+            border: none;
             cursor: pointer;
-            border-radius: 5px; /* Rounded corners */
-            transition: background-color 0.3s; /* Smooth transition for hover effect */
+            transition: background-color 0.3s;
         }
 
-        .ybo-type-btn:hover, .ybo-button:hover {
-            background-color: #0033aa; /* Darker blue on hover */
-        }
-
-        .ybo-type-btn:active, .ybo-button:active {
-            background-color: #002288; /* Even darker blue on click */
+        .nav-btn:hover {
+            background-color: #ff9a9e;
+            color: white;
         }
     </style>
 </head>
