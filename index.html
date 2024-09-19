@@ -4,22 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yang-Baxter, Tetrahedron and Higher Simplex Operators</title>
-    <style>
+   <style>
         body {
-            /* Linear gradient from light blue to purple */
-            background: linear-gradient(135deg, #89f7fe, #66a6ff);
+            /* Blurred background image with gradient overlay */
+            background: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
             margin: 0;
             padding: 0;
-            height: 100vh; /* Ensures the background covers the full height */
+            height: 100vh;
+            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+        }
+
+        /* Gradient overlay */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 99, 71, 0.7), rgba(0, 128, 128, 0.7));
+            z-index: 1;
+            backdrop-filter: blur(10px); /* Add a blur to the background */
         }
 
         h1 {
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 3em;
+            z-index: 2; /* Ensures the text appears above the gradient */
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        p {
+            font-size: 1.5em;
+            z-index: 2;
+            text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
         }
     </style>
     <style>
