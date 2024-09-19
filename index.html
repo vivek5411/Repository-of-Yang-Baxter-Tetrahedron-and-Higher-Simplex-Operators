@@ -319,6 +319,7 @@
     // Event listeners for YBO buttons
    // Event listeners for YBO buttons
  // Event listeners for YBO buttons
+    // Event listeners for YBO buttons
     document.querySelectorAll('.ybo-button').forEach(button => {
         button.addEventListener('click', function() {
             const ybo = this.getAttribute('data-ybo');
@@ -326,19 +327,18 @@
             const eigenvalueData = eigenvalues[ybo];
 
             if (matrixData && eigenvalueData) {
-                // Create a table for matrix display with eigenvalues
-                let matrixHTML = '<table style="border-collapse: collapse;">';
-                matrixData.forEach((row, index) => {
-                    matrixHTML += '<tr>';
-                    row.forEach(element => {
-                        matrixHTML += `<td style="border: 1px solid black; padding: 5px;">${element}</td>`;
-                    });
-                    // Add eigenvalue in the last column
-                    matrixHTML += `<td style="border: 1px solid black; padding: 5px;">${eigenvalueData[index]}</td>`;
-                    matrixHTML += '</tr>';
+                // Create a string for matrix display
+                let matrixHTML = '<pre>';
+                matrixData.forEach(row => {
+                    matrixHTML += '(' + row.join(', ') + ')\n';
                 });
-                matrixHTML += '</table>';
-                document.getElementById('matrix-display').innerHTML = matrixHTML;
+                matrixHTML += '</pre>';
+
+                // Create a string for eigenvalues display
+                const eigenvaluesHTML = `Eigenvalues: [${eigenvalueData.join(', ')}]`;
+
+                // Update the display
+                document.getElementById('matrix-display').innerHTML = matrixHTML + '<br>' + eigenvaluesHTML;
             } else {
                 document.getElementById('matrix-display').innerHTML = `<p>No data available for ${ybo}.</p>`;
             }
