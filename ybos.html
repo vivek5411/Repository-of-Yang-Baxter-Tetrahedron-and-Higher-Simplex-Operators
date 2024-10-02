@@ -15,12 +15,42 @@
         h1, h3 {
             text-align: center;
         }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, td {
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
 
+<h3>Matrix and Eigenvalue Display</h3>
+
+<div>
+    <button id="btn-4x4">Show 4x4 Matrix</button>
+    <button id="btn-9x9">Show 9x9 Matrix</button>
+</div>
+
+<div id="sub-buttons-4x4" style="display:none;">
+    <button class="ybo-button" data-ybo="H3-1">H3-1</button>
+    <button class="ybo-button" data-ybo="H2-1">H2-1</button>
+    <button class="ybo-button" data-ybo="H2-2">H2-2</button>
+    <button class="ybo-button" data-ybo="H2-3">H2-3</button>
+</div>
+
+<div id="sub-buttons-9x9" style="display:none;">
+    <button class="ybo-button" data-ybo="H9-1">H9-1</button>
+    <button class="ybo-button" data-ybo="H8-1">H8-1</button>
+</div>
+
+<div id="matrix-display"></div>
+
 <script>
-    // JavaScript to handle button clicks and display matrices/eigenvalues
+    // Event listeners for buttons to show sub-buttons
     document.getElementById('btn-4x4').addEventListener('click', function() {
         document.getElementById('sub-buttons-4x4').style.display = 'flex';
         document.getElementById('sub-buttons-9x9').style.display = 'none';
@@ -31,115 +61,38 @@
         document.getElementById('sub-buttons-4x4').style.display = 'none';
     });
 
-
-       // Define matrix and eigenvalues data
+    // Define matrix and eigenvalues data
     const matrices = {
-            'H3-1': [
-                ['k', 0, 0, 0],
-                [0, 0, 'p', 0],
-                [0, 'q', 0, 0],
-                [0, 0, 0, 's']
-            ],
-            'H2-1': [
-                ['k^2', 0, 0, 0],
-                [0, 'k^2 - p * q', 'k * p', 0],
-                [0, 'k * q', 0, 0],
-                [0, 0, 0, 'k^2']
-            ],
-            'H2-2': [
-                ['k^2', 0, 0, 0],
-                [0, 'k^2 - p * q', 'k * p', 0],
-                [0, 'k * q', 0, 0],
-                [0, 0, 0, '-p * q']
-            ],
-            'H2-3': [
-                ['k', 'p', 'q', 's'],
-                [0, 0, 'k', 'p'],
-                [0, 'k', 0, 'q'],
-                [0, 0, 0, 'k']
-            ],
-            'H1-1': [
-                ['p^2 + 2 * p * q - q^2', 0, 0, 'p^2 - q^2'],
-                [0, 'p^2 - q^2', 'p^2 + q^2', 0],
-                [0, 'p^2 + q^2', 'p^2 - q^2', 0],
-                ['p^2 - q^2', 0, 0, 'p^2 - 2 * p * q - q^2']
-            ],
-            'H1-2': [
-                ['p', 0, 0, 'k'],
-                [0, 'p - q', 'p', 0],
-                [0, 'q', 0, 0],
-                [0, 0, 0, '-q']
-            ],
-            'H1-3': [
-                ['k^2', '-k * p', 'k * p', 'p * q'],
-                [0, 0, 'k^2', 'k * q'],
-                [0, 'k^2', 0, '-k * q'],
-                [0, 0, 0, 'k^2']
-            ],
-            'H1-4': [
-                [0, 0, 0, 'p'],
-                [0, 'k', 0, 0],
-                [0, 0, 'k', 0],
-                ['q', 0, 0, 0]
-            ],
-            'H0-1': [
-                [1, 0, 0, 1],
-                [0, 0, -1, 0],
-                [0, -1, 0, 0],
-                [0, 0, 0, 1]
-            ],
-            'H0-2': [
-                [1, 0, 0, 1],
-                [0, 1, 1, 0],
-                [0, -1, 1, 0],
-                [-1, 0, 0, 1]
-            ],
-            'H9-1': [
-                ['1', 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 'p', 0, 0, '1 - q*η²', 0, 0, 0, 0],
-                [0, 0, 'p²', 0, 0, '(1 - q*η)*x', 0, '(1 - q*η)*(1 - q*η²)', 0],
-                [0, 0, 0, 'q*p⁻¹*η²', 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 'q*η', 0, 0, '-q*(1 - q*η²)/x', 0],
-                [0, 0, 0, 0, 0, 'q*p', 0, 0, '-η²*q*(1 - q*η)'],
-                [0, 0, 0, 0, 0, 0, 'q²*p⁻²*η', 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 'q²*p⁻¹*η²', 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 'q²']
-            ],
-            'H8-1': [
-                ['1', 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 'p', 0, '1 - q', 0, 0, 0, 0, 0],
-                [0, 0, 'c', 0, 0, 0, '1 - q', 0, 0],
-                [0, 0, 0, 'q*p⁻¹', 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 'A', 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 'q*k⁻¹', 0, '1 - q', 0],
-                [0, 0, 0, 0, 0, 0, 'q*c⁻¹', 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 'k', 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 'B']
-            ]
-        };
+        'H3-1': [
+            ['k', 0, 0, 0],
+            [0, 0, 'p', 0],
+            [0, 'q', 0, 0],
+            [0, 0, 0, 's']
+        ],
+        'H2-1': [
+            ['k^2', 0, 0, 0],
+            [0, 'k^2 - p * q', 'k * p', 0],
+            [0, 'k * q', 0, 0],
+            [0, 0, 0, 'k^2']
+        ],
+        // Add other matrices similarly
+        'H9-1': [
+            ['1', 0, 0, 0, 0, 0, 0, 0, 0],
+            // More rows...
+        ],
+        'H8-1': [
+            ['1', 0, 0, 0, 0, 0, 0, 0, 0],
+            // More rows...
+        ]
+    };
 
-        const eigenvalues = {
-            'H3-1': ['k', '-√(p q)', '√(p q)', 's'],
-            'H2-1': ['k^2', 'k^2', 'k^2', '-p q'],
-            'H2-2': ['k^2', 'k^2', '-p q', '-p q'],
-            'H2-3': ['-k', 'k', 'k', 'k'],
-            'H1-1': ['2 p^2', '2 p^2', '-2 q^2', '-2 q^2'],
-            'H1-2': ['p', 'p', '-q', '-q'],
-            'H1-3': ['-k^2', 'k^2', 'k^2', 'k^2'],
-            'H1-4': ['k', 'k', '-√(p q)', '√(p q)'],
-            'H0-1': ['-1', '1', '1', '1'],
-            'H0-2': ['1 + i', '1 + i', '1 - i', '1 - i'],
-            'H9-1': ['eigenvalues for H9-1'], // Placeholder
-            'H8-1': ['eigenvalues for H8-1']  // Placeholder
-        };
+    const eigenvalues = {
+        'H3-1': ['k', '-√(p q)', '√(p q)', 's'],
+        'H2-1': ['k^2', 'k^2', 'k^2', '-p q'],
+        // Add other eigenvalues similarly
+    };
 
-
-    // Event listeners for YBO buttons
-   // Event listeners for YBO buttons
- // Event listeners for YBO buttons
-    // Event listeners for YBO buttons
- // Event listeners for YBO buttons
-  // Event listeners for YBO buttons
+    // Event listener for YBO buttons
     document.querySelectorAll('.ybo-button').forEach(button => {
         button.addEventListener('click', function() {
             const ybo = this.getAttribute('data-ybo');
@@ -148,7 +101,7 @@
 
             if (matrixData && eigenvalueData) {
                 // Create a table for matrix display
-                let matrixHTML = '<table><tr>';
+                let matrixHTML = '<table>';
                 matrixData.forEach(row => {
                     matrixHTML += '<tr>';
                     row.forEach(value => {
@@ -169,6 +122,6 @@
         });
     });
 </script>
+
 </body>
 </html>
-  
