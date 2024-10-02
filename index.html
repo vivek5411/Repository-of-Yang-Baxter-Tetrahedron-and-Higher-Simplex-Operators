@@ -3,419 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yang-Baxter, Tetrahedron and Higher Simplex Operators</title>
+    <title>Knot Polynomials Viewer</title>
     <style>
-        /* Apply a modern, dynamic background using gradients */
+        /* General Page Styling */
         body {
-            background: linear-gradient(120deg, #ff9a9e, #fad0c4, #fcb69f);
-            background-size: 400% 400%;
-            animation: gradientAnimation 15s ease infinite;
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            height: 100vh;
-            overflow: hidden;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fcb69f);
+            background-size: 200% 200%;
+            animation: gradientAnimation 10s ease infinite;
+            color: #333;
         }
 
-        /* Create a smooth, shifting gradient animation */
         @keyframes gradientAnimation {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        /* Container for the horizontal sections */
-        .horizontal-scroll {
-            display: flex;
-            flex-direction: row;
-            width: 300vw; /* 3 sections of 100vw each */
-            height: 100vh;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .section {
-            width: 100vw;
-            height: 100vh;
+        h1 {
             text-align: center;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2rem;
-            padding: 20px;
+            color: #333;
+            font-size: 3em;
+            margin-top: 60px;
+            animation: fadeIn 2s ease;
         }
 
-        #section1 { background-color: rgba(255, 100, 100, 0.8); }
-        #section2 { background-color: rgba(100, 150, 255, 0.8); }
-        #section3 { background-color: rgba(100, 255, 150, 0.8); }
-
-        /* Navigation buttons */
-        .nav-btns {
-            position: fixed;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 20px;
-        }
-
-        .nav-btn {
-            padding: 10px 20px;
-            background-color: white;
-            color: #ff9a9e;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .nav-btn:hover {
-            background-color: #ff9a9e;
-            color: white;
-        }
-
-        /* YBO buttons */
-        #ybo-type-buttons {
-            margin: 20px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .ybo-type-btn, .ybo-button {
-            padding: 10px 15px;
-            margin: 5px;
-            background-color: rgba(255, 255, 255, 0.8);
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .ybo-type-btn:hover, .ybo-button:hover {
-            background-color: rgba(255, 100, 100, 0.8);
-            color: white;
-        }
-
-        .ybo-group {
-            display: none;
-            flex-direction: row;
-            align-items: center;
-        }
-
-        .active {
-            display: flex;
-        }
-
-        /* Display areas for matrices and eigenvalues */
-        #matrix-display, #eigenvalues-display {
-            margin: 20px;
-            padding: 10px;
-            border: 1px solid white;
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        table {
-            margin: auto;
-            border-collapse: collapse;
-        }
-
-        table td {
-            border: 1px solid white;
-            padding: 10px;
+        nav {
             text-align: center;
-            color: black;
+            margin-top: 20px;
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        /* Keyframes for Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
 <body>
+    <header>
+        <h1>Repository of Yang-Baxter, Tetrahedron and Higher Simplex Operators</h1>
+        <p>This website combines two important theoretical developments: integrable models (in both low and higher dimensions) and the rapidly growing field of quantum computation (currently under development!).</p>
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="ybos.html">Yang-Baxter Operators</a>
+        <a href="thet.html">Tetrahedron Operators</a>
+        <a href="projects.html">Research & Projects</a>
+        <a href="team.html">Team Members</a>
+        <a href="References.html">Citation</a>
+    </nav>
 
-<header>
-    <h1>Repository of Yang-Baxter, Tetrahedron and Higher Simplex Operators</h1>
-    <p>This website combines two important theoretical developments: integrable models (in both low and higher dimensions) and the rapidly growing field of quantum computation (currently under development!).</p>
-</header>
-
-<nav>
-    <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#ybos">Yang-Baxter Operators</a></li>
-        <li><a href="#thos">Tetrahedron Operators</a></li>
-        <li><a href="#hsos">Higher Simplex Operators</a></li>
-        <li><a href="#projects">Research & Projects</a></li>
-        <li><a href="#team-members">Team Members</a></li>
-        <li><a href="#citation">Citation</a></li>
-    </ul>
-</nav>
-
-<section id="home">
-    <h2>About Yang-Baxter Operators</h2>
-    <p>Yang-Baxter and 2-simplex operators play a key role in both Physics and Mathematics, with applications in quantum systems, knot theory, and quantum computation. Their higher-dimensional counterparts, n-simplex operators, extend these uses and are gaining importance. This website offers a comprehensive update on the latest advancements in this field.</p>
-</section>
-
-
-<section id="ybos">
-    <h2>YBO Matrix and Eigenvalues Viewer</h2>
-
-    <!-- Buttons to Choose Between 4x4 and 9x9 YBOs -->
-    <div id="ybo-type-buttons">
-        <button class="ybo-type-btn" id="btn-4x4">4x4 YBOs</button>
-        <button class="ybo-type-btn" id="btn-9x9">9x9 YBOs</button>
-    </div>
-
-    <!-- Display for 4x4 YBO Buttons -->
-    <div id="sub-buttons-4x4" class="ybo-group active" style="display: flex; flex-wrap: wrap; gap: 10px;">
-        <button class="ybo-button" data-ybo="H3-1">H3,1</button>
-        <button class="ybo-button" data-ybo="H2-1">H2,1</button>
-        <button class="ybo-button" data-ybo="H2-2">H2,2</button>
-        <button class="ybo-button" data-ybo="H2-3">H2,3</button>
-        <button class="ybo-button" data-ybo="H1-1">H1,1</button>
-        <button class="ybo-button" data-ybo="H1-2">H1,2</button>
-        <button class="ybo-button" data-ybo="H1-3">H1,3</button>
-        <button class="ybo-button" data-ybo="H1-4">H1,4</button>
-        <button class="ybo-button" data-ybo="H0-1">H0,1</button>
-        <button class="ybo-button" data-ybo="H0-2">H0,2</button>
-    </div>
-
-    <!-- Display for 9x9 YBO Buttons -->
-    <div id="sub-buttons-9x9" class="ybo-group" style="display: none; flex-wrap: wrap; gap: 10px;">
-        <button class="ybo-button" data-ybo="H9-1">H9,1</button>
-        <button class="ybo-button" data-ybo="H8-1">H8,1</button>
-        <button class="ybo-button" data-ybo="H8-2">H8,2</button>
-        <button class="ybo-button" data-ybo="H8-3">H8,3</button>
-        <button class="ybo-button" data-ybo="H7-1">H7,1</button>
-        <button class="ybo-button" data-ybo="H7-2">H7,2</button>
-        <button class="ybo-button" data-ybo="H6-1">H6,1</button>
-        <button class="ybo-button" data-ybo="H6-2">H6,2</button>
-        <button class="ybo-button" data-ybo="H4-1">H4,1</button>
-        <button class="ybo-button" data-ybo="H4-2">H4,2</button>
-        <button class="ybo-button" data-ybo="H4-3">H4,3</button>
-        <button class="ybo-button" data-ybo="H4-4">H4,4</button>
-    </div>
-
-    <!-- Display Area for Matrices and Eigenvalues -->
-    <h3>Matrix:</h3>
-    <div id="matrix-display">
-        <p>Click a YBO button to view the matrix and eigenvalues.</p>
-    </div>
-</section>
-
-<style>
-    #matrix-display table {
-        border-collapse: collapse;
-        margin-top: 10px;
-    }
-
-    #matrix-display th, #matrix-display td {
-        border: 1px solid black;
-        padding: 8px;
-        text-align: center;
-    }
-
-    #sub-buttons-4x4, #sub-buttons-9x9 {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px; /* Space between buttons */
-    }
-</style>
-
-    <section id="projects">
-    <!-- Content for Research & Projects -->
-</section>
-<section id="thos">
-    </section>
-<section id="hsos">
-    </section>
-<section id="team-members">
-    <h2>Team Members</h2>
-      <!-- Collaborator 0 -->
-    <div class="team-member">
-        <h3>Prof. Vladimir Korepin </h3>
-        <p><strong>Affiliation:</strong> C. N. Yang Institute for Theoretical Physics,
-Stony Brook University, New York, USA </p>
-        <p class="email"><strong>Email:</strong> <a href="mailto:vladimir.korepin@stonybrook.edu
-">vladimir.korepin@stonybrook.edu</a> </p>
-    </div>
-    <!-- Collaborator 1 -->
-    <div class="team-member">
-        <h3>Prof. Pramod Padmanabhan</h3>
-        <p><strong>Affiliation:</strong> Indian Institute of Technology Bhubaneswar,India</p>
-        <p class="email"><strong>Email:</strong> <a href="mailto:pramod@iitbbs.ac.in">pramod@iitbbs.ac.in</a></p>
-    </div>
-
-    <!-- Collaborator 2 -->
-    <div class="team-member">
-        <h3>Dr. Vivek Kumar Singh</h3>
-        <p><strong>Affiliation:</strong> New York University Abu Dhabi, UAE</p>
-        <p class="email"><strong>Email:</strong> <a href="mailto:vks2024@nyu.edu">vks2024@nyu.edu</a></p>
-    </div>
-
-    <!-- Collaborator 3 -->
-    <div class="team-member">
-        <h3>Somnath Maity </h3>
-        <p><strong>Affiliation:</strong>Indian Institute of Technology Bhubaneswar,India </p>
-        <p class="email"><strong>Email:</strong> <a href="mailto:a22ph09013@iitbbs.ac.in">a22ph09013@iitbbs.ac.in</a></p>
-    </div>
-      <!-- Collaborator 4 -->
-    <div class="team-member">
-        <h3>Akash Sinha</h3>
-        <p><strong>Affiliation:</strong> Indian Institute of Technology Bhubaneswar,India</p>
-        <p class="email"><strong>Email:</strong> <a href="mailto:s23ph09005@iitbbs.ac.in">s23ph09005@iitbbs.ac.in</a></p>
-    </div>
-</section>
-
-<section id="citation">
-    <!-- Citation Section Content -->
-</section>
-
-    
-   
-<script>
-    // JavaScript to handle button clicks and display matrices/eigenvalues
-    document.getElementById('btn-4x4').addEventListener('click', function() {
-        document.getElementById('sub-buttons-4x4').style.display = 'flex';
-        document.getElementById('sub-buttons-9x9').style.display = 'none';
-    });
-
-    document.getElementById('btn-9x9').addEventListener('click', function() {
-        document.getElementById('sub-buttons-9x9').style.display = 'flex';
-        document.getElementById('sub-buttons-4x4').style.display = 'none';
-    });
-
-       // Define matrix and eigenvalues data
-    const matrices = {
-            'H3-1': [
-                ['k', 0, 0, 0],
-                [0, 0, 'p', 0],
-                [0, 'q', 0, 0],
-                [0, 0, 0, 's']
-            ],
-            'H2-1': [
-                ['k^2', 0, 0, 0],
-                [0, 'k^2 - p * q', 'k * p', 0],
-                [0, 'k * q', 0, 0],
-                [0, 0, 0, 'k^2']
-            ],
-            'H2-2': [
-                ['k^2', 0, 0, 0],
-                [0, 'k^2 - p * q', 'k * p', 0],
-                [0, 'k * q', 0, 0],
-                [0, 0, 0, '-p * q']
-            ],
-            'H2-3': [
-                ['k', 'p', 'q', 's'],
-                [0, 0, 'k', 'p'],
-                [0, 'k', 0, 'q'],
-                [0, 0, 0, 'k']
-            ],
-            'H1-1': [
-                ['p^2 + 2 * p * q - q^2', 0, 0, 'p^2 - q^2'],
-                [0, 'p^2 - q^2', 'p^2 + q^2', 0],
-                [0, 'p^2 + q^2', 'p^2 - q^2', 0],
-                ['p^2 - q^2', 0, 0, 'p^2 - 2 * p * q - q^2']
-            ],
-            'H1-2': [
-                ['p', 0, 0, 'k'],
-                [0, 'p - q', 'p', 0],
-                [0, 'q', 0, 0],
-                [0, 0, 0, '-q']
-            ],
-            'H1-3': [
-                ['k^2', '-k * p', 'k * p', 'p * q'],
-                [0, 0, 'k^2', 'k * q'],
-                [0, 'k^2', 0, '-k * q'],
-                [0, 0, 0, 'k^2']
-            ],
-            'H1-4': [
-                [0, 0, 0, 'p'],
-                [0, 'k', 0, 0],
-                [0, 0, 'k', 0],
-                ['q', 0, 0, 0]
-            ],
-            'H0-1': [
-                [1, 0, 0, 1],
-                [0, 0, -1, 0],
-                [0, -1, 0, 0],
-                [0, 0, 0, 1]
-            ],
-            'H0-2': [
-                [1, 0, 0, 1],
-                [0, 1, 1, 0],
-                [0, -1, 1, 0],
-                [-1, 0, 0, 1]
-            ],
-            'H9-1': [
-                ['1', 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 'p', 0, 0, '1 - q*η²', 0, 0, 0, 0],
-                [0, 0, 'p²', 0, 0, '(1 - q*η)*x', 0, '(1 - q*η)*(1 - q*η²)', 0],
-                [0, 0, 0, 'q*p⁻¹*η²', 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 'q*η', 0, 0, '-q*(1 - q*η²)/x', 0],
-                [0, 0, 0, 0, 0, 'q*p', 0, 0, '-η²*q*(1 - q*η)'],
-                [0, 0, 0, 0, 0, 0, 'q²*p⁻²*η', 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 'q²*p⁻¹*η²', 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 'q²']
-            ],
-            'H8-1': [
-                ['1', 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 'p', 0, '1 - q', 0, 0, 0, 0, 0],
-                [0, 0, 'c', 0, 0, 0, '1 - q', 0, 0],
-                [0, 0, 0, 'q*p⁻¹', 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 'A', 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 'q*k⁻¹', 0, '1 - q', 0],
-                [0, 0, 0, 0, 0, 0, 'q*c⁻¹', 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 'k', 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 'B']
-            ]
-        };
-
-        const eigenvalues = {
-            'H3-1': ['k', '-√(p q)', '√(p q)', 's'],
-            'H2-1': ['k^2', 'k^2', 'k^2', '-p q'],
-            'H2-2': ['k^2', 'k^2', '-p q', '-p q'],
-            'H2-3': ['-k', 'k', 'k', 'k'],
-            'H1-1': ['2 p^2', '2 p^2', '-2 q^2', '-2 q^2'],
-            'H1-2': ['p', 'p', '-q', '-q'],
-            'H1-3': ['-k^2', 'k^2', 'k^2', 'k^2'],
-            'H1-4': ['k', 'k', '-√(p q)', '√(p q)'],
-            'H0-1': ['-1', '1', '1', '1'],
-            'H0-2': ['1 + i', '1 + i', '1 - i', '1 - i'],
-            'H9-1': ['eigenvalues for H9-1'], // Placeholder
-            'H8-1': ['eigenvalues for H8-1']  // Placeholder
-        };
-
-
-    // Event listeners for YBO buttons
-   // Event listeners for YBO buttons
- // Event listeners for YBO buttons
-    // Event listeners for YBO buttons
- // Event listeners for YBO buttons
-  // Event listeners for YBO buttons
-    document.querySelectorAll('.ybo-button').forEach(button => {
-        button.addEventListener('click', function() {
-            const ybo = this.getAttribute('data-ybo');
-            const matrixData = matrices[ybo];
-            const eigenvalueData = eigenvalues[ybo];
-
-            if (matrixData && eigenvalueData) {
-                // Create a table for matrix display
-                let matrixHTML = '<table><tr>';
-                matrixData.forEach(row => {
-                    matrixHTML += '<tr>';
-                    row.forEach(value => {
-                        matrixHTML += `<td>${value}</td>`;
-                    });
-                    matrixHTML += '</tr>';
-                });
-                matrixHTML += '</table>';
-
-                // Create a string for eigenvalues display
-                const eigenvaluesHTML = `Eigenvalues: [${eigenvalueData.join(', ')}]`;
-
-                // Update the display
-                document.getElementById('matrix-display').innerHTML = matrixHTML + '<br>' + eigenvaluesHTML;
-            } else {
-                document.getElementById('matrix-display').innerHTML = `<p>No data available for ${ybo}.</p>`;
-            }
-        });
-    });
-</script>
 </body>
 </html>
-
-
