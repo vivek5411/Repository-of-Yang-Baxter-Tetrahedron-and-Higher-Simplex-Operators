@@ -24,17 +24,25 @@
             padding: 8px;
             text-align: center;
         }
+        button {
+            margin: 5px;
+        }
+        #sub-buttons-4x4, #sub-buttons-9x9 {
+            margin: 10px 0;
+        }
     </style>
 </head>
 <body>
 
-<h3>Matrix and Eigenvalue Display</h3>
+<h1>4x4 YBOs Viewer</h1>
 
+<!-- Buttons to select between 4x4 and 9x9 matrices -->
 <div>
-    <button id="btn-4x4">Show 4x4 Matrix</button>
-    <button id="btn-9x9">Show 9x9 Matrix</button>
+    <button id="btn-4x4">Show 4x4 Matrix Options</button>
+    <button id="btn-9x9">Show 9x9 Matrix Options</button>
 </div>
 
+<!-- Sub-buttons for 4x4 matrices -->
 <div id="sub-buttons-4x4" style="display:none;">
     <button class="ybo-button" data-ybo="H3-1">H3-1</button>
     <button class="ybo-button" data-ybo="H2-1">H2-1</button>
@@ -42,15 +50,17 @@
     <button class="ybo-button" data-ybo="H2-3">H2-3</button>
 </div>
 
+<!-- Sub-buttons for 9x9 matrices -->
 <div id="sub-buttons-9x9" style="display:none;">
     <button class="ybo-button" data-ybo="H9-1">H9-1</button>
     <button class="ybo-button" data-ybo="H8-1">H8-1</button>
 </div>
 
+<!-- Display area for matrix and eigenvalues -->
 <div id="matrix-display"></div>
 
 <script>
-    // Event listeners for buttons to show sub-buttons
+    // JavaScript to handle button clicks and display matrices/eigenvalues
     document.getElementById('btn-4x4').addEventListener('click', function() {
         document.getElementById('sub-buttons-4x4').style.display = 'flex';
         document.getElementById('sub-buttons-9x9').style.display = 'none';
@@ -61,7 +71,7 @@
         document.getElementById('sub-buttons-4x4').style.display = 'none';
     });
 
-    // Define matrix and eigenvalues data
+    // Define matrix and eigenvalue data
     const matrices = {
         'H3-1': [
             ['k', 0, 0, 0],
@@ -75,24 +85,52 @@
             [0, 'k * q', 0, 0],
             [0, 0, 0, 'k^2']
         ],
-        // Add other matrices similarly
+        'H2-2': [
+            ['k^2', 0, 0, 0],
+            [0, 'k^2 - p * q', 'k * p', 0],
+            [0, 'k * q', 0, 0],
+            [0, 0, 0, '-p * q']
+        ],
+        'H2-3': [
+            ['k', 'p', 'q', 's'],
+            [0, 0, 'k', 'p'],
+            [0, 'k', 0, 'q'],
+            [0, 0, 0, 'k']
+        ],
         'H9-1': [
             ['1', 0, 0, 0, 0, 0, 0, 0, 0],
-            // More rows...
+            [0, 'p', 0, 0, '1 - q*η²', 0, 0, 0, 0],
+            [0, 0, 'p²', 0, 0, '(1 - q*η)*x', 0, '(1 - q*η)*(1 - q*η²)', 0],
+            [0, 0, 0, 'q*p⁻¹*η²', 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 'q*η', 0, 0, '-q*(1 - q*η²)/x', 0],
+            [0, 0, 0, 0, 0, 'q*p', 0, 0, '-η²*q*(1 - q*η)'],
+            [0, 0, 0, 0, 0, 0, 'q²*p⁻²*η', 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 'q²*p⁻¹*η²', 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 'q²']
         ],
         'H8-1': [
             ['1', 0, 0, 0, 0, 0, 0, 0, 0],
-            // More rows...
+            [0, 'p', 0, '1 - q', 0, 0, 0, 0, 0],
+            [0, 0, 'c', 0, 0, 0, '1 - q', 0, 0],
+            [0, 0, 0, 'q*p⁻¹', 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 'A', 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 'q*k⁻¹', 0, '1 - q', 0],
+            [0, 0, 0, 0, 0, 0, 'q*c⁻¹', 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 'k', 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 'B']
         ]
     };
 
     const eigenvalues = {
         'H3-1': ['k', '-√(p q)', '√(p q)', 's'],
         'H2-1': ['k^2', 'k^2', 'k^2', '-p q'],
-        // Add other eigenvalues similarly
+        'H2-2': ['k^2', 'k^2', '-p q', '-p q'],
+        'H2-3': ['-k', 'k', 'k', 'k'],
+        'H9-1': ['eigenvalues for H9-1'], // Placeholder
+        'H8-1': ['eigenvalues for H8-1']  // Placeholder
     };
 
-    // Event listener for YBO buttons
+    // Event listeners for YBO buttons
     document.querySelectorAll('.ybo-button').forEach(button => {
         button.addEventListener('click', function() {
             const ybo = this.getAttribute('data-ybo');
