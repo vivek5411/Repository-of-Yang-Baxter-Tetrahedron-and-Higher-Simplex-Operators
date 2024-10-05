@@ -55,6 +55,28 @@
         .sub-section {
             margin-top: 20px;
         }
+        .sub-buttons {
+            display: none;
+            margin-top: 10px;
+        }
+        .sub-buttons button {
+            margin: 5px;
+            padding: 8px 16px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .sub-buttons button:hover {
+            background-color: #666;
+        }
+        .details {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
     </style>
 </head>
 <body>
@@ -123,154 +145,98 @@
     <h2>Algebraic Ansatz</h2>
     <p>Classifying Yang-Baxter operators is a crucial step in the study of simulating integrable quantum systems on quantum computers. Hietarinta's early work focused on classifying constant Yang-Baxter solutions for a two-dimensional Hilbert space (qubit representation), identifying 11 families of invertible solutions, including one derived from the permutation operator. While effective for \(4 \times 4\) systems, this method becomes impractical for higher-dimensional representations. We address this limitation by constructing constant Yang-Baxter solutions in a representation-independent manner, utilizing ansätze from algebraic structures.</p>
     <p>Here, we explore the algebraic solutions associated with YBOs.</p>
+
+    <!-- Main buttons for Algebraic Ansatz -->
+    <div class="sub-section">
+        <h3>Select Algebraic Ansatz</h3>
+        <button onclick="toggleSubButtons(1)">Button 1</button>
+        <button onclick="toggleSubButtons(2)">Button 2</button>
+        <button onclick="toggleSubButtons(3)">Button 3</button>
+        <button onclick="toggleSubButtons(4)">Button 4</button>
+
+        <!-- Sub-buttons for Button 1 -->
+        <div class="sub-buttons" id="sub-buttons-1">
+            <h4>Sub Buttons for Button 1</h4>
+            <button class="sub-matrix-btn" data-matrix="H11">H11</button>
+            <button class="sub-matrix-btn" data-matrix="H12">H12</button>
+        </div>
+
+        <!-- Sub-buttons for Button 2 -->
+        <div class="sub-buttons" id="sub-buttons-2">
+            <h4>Sub Buttons for Button 2</h4>
+            <button class="sub-matrix-btn" data-matrix="H21">H21</button>
+            <button class="sub-matrix-btn" data-matrix="H22">H22</button>
+        </div>
+
+        <!-- Sub-buttons for Button 3 -->
+        <div class="sub-buttons" id="sub-buttons-3">
+            <h4>Sub Buttons for Button 3</h4>
+            <button class="sub-matrix-btn" data-matrix="H31">H31</button>
+            <button class="sub-matrix-btn" data-matrix="H32">H32</button>
+        </div>
+
+        <!-- Sub-buttons for Button 4 -->
+        <div class="sub-buttons" id="sub-buttons-4">
+            <h4>Sub Buttons for Button 4</h4>
+            <button class="sub-matrix-btn" data-matrix="H41">H41</button>
+            <button class="sub-matrix-btn" data-matrix="H42">H42</button>
+        </div>
+    </div>
+
+    <!-- Details Display -->
+    <div class="details" id="details-display">
+        <h4>Matrix Operators Details:</h4>
+        <p id="operator-details"></p>
+    </div>
 </div>
 
 <script>
-    // Function to open the appropriate tab
+    // Function to open selected tab
     function openTab(tabName) {
         const tabs = document.querySelectorAll('.tab-content');
-        tabs.forEach(tab => tab.classList.remove('active'));
-        document.getElementById(tabName).classList.add('active');
-    }
-
-    // Function to show matrix type
-    function showMatrixType(type) {
-        const tab4x4 = document.getElementById('4x4-buttons');
-        const tab9x9 = document.getElementById('9x9-buttons');
-        
-        if (type === '4x4') {
-            tab4x4.style.display = 'block';
-            tab9x9.style.display = 'none';
-            document.getElementById('matrix-display-4x4').innerHTML = ''; // Clear previous display
-            document.getElementById('eigenvalues-4x4').innerHTML = ''; // Clear previous eigenvalues
-        } else {
-            tab4x4.style.display = 'none';
-            tab9x9.style.display = 'block';
-            document.getElementById('matrix-display-9x9').innerHTML = ''; // Clear previous display
-            document.getElementById('eigenvalues-9x9').innerHTML = ''; // Clear previous eigenvalues
-        }
-    }
-
-    // Matrix data and rendering logic
-       const matrices = {
-            'H3-1': [
-                ['k', 0, 0, 0],
-                [0, 0, 'p', 0],
-                [0, 'q', 0, 0],
-                [0, 0, 0, 's']
-            ],
-            'H2-1': [
-                ['k^2', 0, 0, 0],
-                [0, 'k^2 - p * q', 'k * p', 0],
-                [0, 'k * q', 0, 0],
-                [0, 0, 0, 'k^2']
-            ],
-            'H2-2': [
-                ['k^2', 0, 0, 0],
-                [0, 'k^2 - p * q', 'k * p', 0],
-                [0, 'k * q', 0, 0],
-                [0, 0, 0, '-p * q']
-            ],
-            'H2-3': [
-                ['k', 'p', 'q', 's'],
-                [0, 0, 'k', 'p'],
-                [0, 'k', 0, 'q'],
-                [0, 0, 0, 'k']
-            ],
-            'H1-1': [
-                ['p^2 + 2 * p * q - q^2', 0, 0, 'p^2 - q^2'],
-                [0, 'p^2 - q^2', 'p^2 + q^2', 0],
-                [0, 'p^2 + q^2', 'p^2 - q^2', 0],
-                ['p^2 - q^2', 0, 0, 'p^2 - 2 * p * q - q^2']
-            ],
-            'H1-2': [
-                ['p', 0, 0, 'k'],
-                [0, 'p - q', 'p', 0],
-                [0, 'q', 0, 0],
-                [0, 0, 0, '-q']
-            ],
-            'H1-3': [
-                ['k^2', '-k * p', 'k * p', 'p * q'],
-                [0, 0, 'k^2', 'k * q'],
-                [0, 'k^2', 0, '-k * q'],
-                [0, 0, 0, 'k^2']
-            ],
-            'H1-4': [
-                [0, 0, 0, 'p'],
-                [0, 'k', 0, 0],
-                [0, 0, 'k', 0],
-                ['q', 0, 0, 0]
-            ],
-            'H0-1': [
-                [1, 0, 0, 1],
-                [0, 0, -1, 0],
-                [0, -1, 0, 0],
-                [0, 0, 0, 1]
-            ],
-            'H0-2': [
-                [1, 0, 0, 1],
-                [0, 1, 1, 0],
-                [0, -1, 1, 0],
-                [-1, 0, 0, 1]
-            ],
-            'H9-1': [
-                ['1', 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 'p', 0, 0, '1 - q*η²', 0, 0, 0, 0],
-                [0, 0, 'p²', 0, 0, '(1 - q*η)*x', 0, '(1 - q*η)*(1 - q*η²)', 0],
-                [0, 0, 0, 'q*p⁻¹*η²', 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 'q*η', 0, 0, '-q*(1 - q*η²)/x', 0],
-                [0, 0, 0, 0, 0, 'q*p', 0, 0, '-η²*q*(1 - q*η)'],
-                [0, 0, 0, 0, 0, 0, 'q²*p⁻²*η', 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 'q²*p⁻¹*η²', 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 'q²']
-            ],
-            'H8-1': [
-                ['1', 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 'p', 0, '1 - q', 0, 0, 0, 0, 0],
-                [0, 0, 'c', 0, 0, 0, '1 - q', 0, 0],
-                [0, 0, 0, 'q*p⁻¹', 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 'A', 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 'q*k⁻¹', 0, '1 - q', 0],
-                [0, 0, 0, 0, 0, 0, 'q*c⁻¹', 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 'k', 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 'B']
-            ]
-        };
-
-
-    // Function to display selected matrix
-    document.querySelectorAll('.matrix-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const matrixKey = this.getAttribute('data-matrix');
-            const matrix = matrices[matrixKey];
-            let matrixHTML = '<table>';
-            for (let row of matrix) {
-                matrixHTML += '<tr>' + row.map(value => `<td>${value}</td>`).join('') + '</tr>';
-            }
-            matrixHTML += '</table>';
-
-            if (matrixKey.startsWith('H')) {
-                // Display the selected 4x4 matrix
-                document.getElementById('matrix-display-4x4').innerHTML = matrixHTML;
-
-                // Calculate and display eigenvalues (dummy example)
-                const eigenvalues = calculateEigenvalues(matrix); // Replace with actual calculation
-                document.getElementById('eigenvalues-4x4').innerHTML = `<h4>Eigenvalues:</h4><p>${eigenvalues.join(', ')}</p>`;
-            } else {
-                // Display the selected 9x9 matrix
-                document.getElementById('matrix-display-9x9').innerHTML = matrixHTML;
-
-                // Calculate and display eigenvalues (dummy example)
-                const eigenvalues = calculateEigenvalues(matrix); // Replace with actual calculation
-                document.getElementById('eigenvalues-9x9').innerHTML = `<h4>Eigenvalues:</h4><p>${eigenvalues.join(', ')}</p>`;
+        tabs.forEach(tab => {
+            tab.classList.remove('active');
+            if (tab.id === tabName) {
+                tab.classList.add('active');
             }
         });
-    });
-
-    // Dummy eigenvalue calculation (replace with actual logic)
-    function calculateEigenvalues(matrix) {
-        return ['λ₁', 'λ₂', 'λ₃', 'λ₄']; // Example output
     }
+
+    // Function to show matrix type (4x4 or 9x9)
+    function showMatrixType(type) {
+        document.getElementById('4x4-buttons').style.display = type === '4x4' ? 'block' : 'none';
+        document.getElementById('9x9-buttons').style.display = type === '9x9' ? 'block' : 'none';
+    }
+
+    // Function to toggle sub-buttons for algebraic ansatz
+    function toggleSubButtons(buttonNum) {
+        const subButtons = document.querySelectorAll('.sub-buttons');
+        subButtons.forEach((subButton, index) => {
+            subButton.style.display = index === buttonNum - 1 ? (subButton.style.display === 'none' ? 'block' : 'none') : 'none';
+        });
+        document.getElementById('operator-details').innerText = ''; // Clear previous details
+    }
+
+    // Example operator details (replace with actual details)
+    const operatorDetails = {
+        'H11': 'Operator H11: This operator commutes with H12 and H21.',
+        'H12': 'Operator H12: This operator commutes with H11 and H22.',
+        'H21': 'Operator H21: This operator commutes with H22 and H31.',
+        'H22': 'Operator H22: This operator commutes with H21 and H32.',
+        'H31': 'Operator H31: This operator commutes with H32 and H41.',
+        'H32': 'Operator H32: This operator commutes with H31 and H42.',
+        'H41': 'Operator H41: This operator commutes with H42 and H12.',
+        'H42': 'Operator H42: This operator commutes with H41 and H11.',
+    };
+
+    // Function to display selected matrix operator details
+    document.querySelectorAll('.sub-matrix-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const matrixKey = this.getAttribute('data-matrix');
+            const details = operatorDetails[matrixKey];
+            document.getElementById('operator-details').innerText = details;
+        });
+    });
 </script>
 
 </body>
