@@ -64,7 +64,7 @@
 <!-- Tabs for different sections -->
 <div class="tabs">
     <button class="tablink" onclick="openTab('summary')">SUMMARY YBOS</button>
-    <button class="tablink" onclick="openTab('matrix-solutions')">MATRIX SOLUTIONS (4x4 & 9x9)</button>
+    <button class="tablink" onclick="openTab('matrix-solutions')">YBOs SOLUTIONS</button>
     <button class="tablink" onclick="openTab('algebraic-ansatz')">ALGEBRAIC ANSATZ</button>
 </div>
 
@@ -73,14 +73,22 @@
     <h2>Summary of Young-Baxter Operators (YBOs)</h2>
     <p>Young-Baxter Operators (YBOs) are crucial in areas like statistical mechanics, quantum groups, and knot theory. They satisfy the Yang-Baxter equation:</p>
     <p style="text-align: center;"><strong>R₁R₂R₁ = R₂R₁R₂</strong></p>
-    <p>This equation governs the interaction between three particles or states in a system..</p>
+    <p>This equation governs the interaction between three particles or states in a system.</p>
 </div>
 
 <!-- Matrix Solutions Tab Content -->
 <div id="matrix-solutions" class="tab-content">
-    <h2>Matrix Solutions for YBOs (4x4 & 9x9)</h2>
-    
+    <h2>Matrix Solutions for YBOs</h2>
+
+    <!-- Buttons for selecting 4x4 and 9x9 solutions -->
     <div class="sub-section">
+        <h3>Select Matrix Type</h3>
+        <button onclick="showMatrixType('4x4')">4x4 YBOs</button>
+        <button onclick="showMatrixType('9x9')">9x9 YBOs</button>
+    </div>
+
+    <!-- 4x4 Matrix Solutions -->
+    <div id="4x4-buttons" class="sub-section" style="display:none;">
         <h3>4x4 Matrix Solutions (H-Solutions)</h3>
         <p>Select a 4x4 matrix solution to display its details.</p>
         <button class="matrix-btn" data-matrix="H3-1">H3-1</button>
@@ -97,7 +105,8 @@
         <div id="matrix-display-4x4"></div>
     </div>
 
-    <div class="sub-section">
+    <!-- 9x9 Matrix Solutions -->
+    <div id="9x9-buttons" class="sub-section" style="display:none;">
         <h3>9x9 Matrix Solutions (H-Solutions)</h3>
         <p>Select a 9x9 matrix solution to display its details.</p>
         <button class="matrix-btn" data-matrix="H9-1">H9-1</button>
@@ -110,75 +119,85 @@
 <!-- Algebraic Ansatz Tab Content -->
 <div id="algebraic-ansatz" class="tab-content">
     <h2>Algebraic Ansatz</h2>
-    <p>Classifying Yang-Baxter operators is a crucial step in the study of simulating integrable quantum systems on quantum computers. Hietarinta's early work focused on classifying constant Yang-Baxter solutions for a two-dimensional Hilbert space (qubit representation), identifying 11 families of invertible solutions, including one derived from the permutation operator. While effective for \(4 \times 4\) systems, this method becomes impractical for higher-dimensional representations.  We address this limitation by constructing constant Yang-Baxter solutions in a representation-independent manner, utilizing ansätze from algebraic structures.</p>
+    <p>Classifying Yang-Baxter operators is a crucial step in the study of simulating integrable quantum systems on quantum computers. Hietarinta's early work focused on classifying constant Yang-Baxter solutions for a two-dimensional Hilbert space (qubit representation), identifying 11 families of invertible solutions, including one derived from the permutation operator. While effective for \(4 \times 4\) systems, this method becomes impractical for higher-dimensional representations. We address this limitation by constructing constant Yang-Baxter solutions in a representation-independent manner, utilizing ansätze from algebraic structures.</p>
     <p>Here, we explore the algebraic solutions associated with YBOs.</p>
 </div>
 
- <script>
-        // Function to show matrix type
-        function showMatrixType(type) {
-            var tab4x4 = document.getElementById('matrix-display-4x4');
-            var tab9x9 = document.getElementById('matrix-display-9x9');
-            if (type === '4x4') {
-                tab4x4.classList.add('active');
-                tab9x9.classList.remove('active');
-            } else if (type === '9x9') {
-                tab9x9.classList.add('active');
-                tab4x4.classList.remove('active');
-            }
+<script>
+    // Function to open the appropriate tab
+    function openTab(tabName) {
+        const tabs = document.querySelectorAll('.tab-content');
+        tabs.forEach(tab => tab.classList.remove('active'));
+        document.getElementById(tabName).classList.add('active');
+    }
+
+    // Function to show matrix type
+    function showMatrixType(type) {
+        const tab4x4 = document.getElementById('4x4-buttons');
+        const tab9x9 = document.getElementById('9x9-buttons');
+        
+        if (type === '4x4') {
+            tab4x4.style.display = 'block';
+            tab9x9.style.display = 'none';
+            document.getElementById('matrix-display-4x4').innerHTML = ''; // Clear previous display
+        } else {
+            tab4x4.style.display = 'none';
+            tab9x9.style.display = 'block';
+            document.getElementById('matrix-display-9x9').innerHTML = ''; // Clear previous display
         }
+    }
 
-        // Matrix data and rendering logic
-        const matrices = {
-            'H3-1': [
-                ['k', 0, 0, 0],
-                [0, 0, 'p', 0],
-                [0, 'q', 0, 0],
-                [0, 0, 0, 's']
-            ],
-            'H2-1': [
-                ['k^2', 0, 0, 0],
-                [0, 'k^2 - p * q', 'k * p', 0],
-                [0, 'k * q', 0, 0],
-                [0, 0, 0, 'k^2']
-            ],
-            'H9-1': [
-                ['1', 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 'p', 0, 0, '1 - q*η²', 0, 0, 0, 0],
-                // Add remaining rows...
-            ],
-            'H8-1': [
-                ['1', 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 'p', 0, '1 - q', 0, 0, 0, 0, 0],
-                // Add remaining rows...
-            ]
-        };
+    // Matrix data and rendering logic
+    const matrices = {
+        'H3-1': [
+            ['k', 0, 0, 0],
+            [0, 0, 'p', 0],
+            [0, 'q', 0, 0],
+            [0, 0, 0, 's']
+        ],
+        'H2-1': [
+            ['k^2', 0, 0, 0],
+            [0, 'k^2 - p * q', 'k * p', 0],
+            [0, 'k * q', 0, 0],
+            [0, 0, 0, 'k^2']
+        ],
+        'H9-1': [
+            ['1', 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 'p', 0, 0, '1 - q*η²', 0, 0, 0, 0],
+            // Add remaining rows...
+        ],
+        'H8-1': [
+            ['1', 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 'p', 0, '1 - q', 0, 0, 0, 0, 0],
+            // Add remaining rows...
+        ]
+    };
 
-        // Event listeners for each matrix button
-        document.querySelectorAll('.matrix-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const matrixId = this.getAttribute('data-matrix');
-                const matrixData = matrices[matrixId];
+    // Event listeners for each matrix button
+    document.querySelectorAll('.matrix-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const matrixId = this.getAttribute('data-matrix');
+            const matrixData = matrices[matrixId];
 
-                let matrixHTML = '<table>';
-                matrixData.forEach(row => {
-                    matrixHTML += '<tr>';
-                    row.forEach(value => {
-                        matrixHTML += `<td>${value}</td>`;
-                    });
-                    matrixHTML += '</tr>';
+            let matrixHTML = '<table>';
+            matrixData.forEach(row => {
+                matrixHTML += '<tr>';
+                row.forEach(cell => {
+                    matrixHTML += `<td>${cell}</td>`;
                 });
-                matrixHTML += '</table>';
-
-                // Display the matrix in the appropriate section based on the active type
-                if (document.getElementById('matrix-display-4x4').classList.contains('active')) {
-                    document.getElementById('matrix-display-4x4').innerHTML = matrixHTML;
-                } else if (document.getElementById('matrix-display-9x9').classList.contains('active')) {
-                    document.getElementById('matrix-display-9x9').innerHTML = matrixHTML;
-                }
+                matrixHTML += '</tr>';
             });
+            matrixHTML += '</table>';
+
+            // Display matrix based on selected type
+            if (matrixId.startsWith('H3') || matrixId.startsWith('H2')) {
+                document.getElementById('matrix-display-4x4').innerHTML = matrixHTML;
+            } else {
+                document.getElementById('matrix-display-9x9').innerHTML = matrixHTML;
+            }
         });
-    </script>
+    });
+</script>
 
 </body>
 </html>
