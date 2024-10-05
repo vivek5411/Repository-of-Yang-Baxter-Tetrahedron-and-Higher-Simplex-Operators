@@ -139,7 +139,104 @@
         <div id="eigenvalues-9x9"></div>
     </div>
 </div>
+<script>
+    // Define matrix and eigenvalues data
+    const matrices = {
+        'H3-1': [
+            ['k', 0, 0, 0],
+            [0, 0, 'p', 0],
+            [0, 'q', 0, 0],
+            [0, 0, 0, 's']
+        ],
+        'H2-1': [
+            ['k^2', 0, 0, 0],
+            [0, 'k^2 - p * q', 'k * p', 0],
+            [0, 'k * q', 0, 0],
+            [0, 0, 0, 'k^2']
+        ],
+        'H2-2': [
+            ['k^2', 0, 0, 0],
+            [0, 'k^2 - p * q', 'k * p', 0],
+            [0, 'k * q', 0, 0],
+            [0, 0, 0, '-p * q']
+        ],
+        'H2-3': [
+            ['k', 'p', 'q', 's'],
+            [0, 0, 'k', 'p'],
+            [0, 'k', 0, 'q'],
+            [0, 0, 0, 'k']
+        ],
+        'H1-1': [
+            ['p^2 + 2 * p * q - q^2', 0, 0, 'p^2 - q^2'],
+            [0, 'p^2 - q^2', 'p^2 + q^2', 0],
+            [0, 'p^2 + q^2', 'p^2 - q^2', 0],
+            ['p^2 - q^2', 0, 0, 'p^2 - 2 * p * q - q^2']
+        ],
+        'H1-2': [
+            ['p', 0, 0, 'k'],
+            [0, 'p - q', 'p', 0],
+            [0, 'q', 0, 0],
+            [0, 0, 0, '-q']
+        ],
+        'H1-3': [
+            ['k^2', '-k * p', 'k * p', 'p * q'],
+            [0, 0, 'k^2', 'k * q'],
+            [0, 'k^2', 0, '-k * q'],
+            [0, 0, 0, 'k^2']
+        ],
+        'H1-4': [
+            [0, 0, 0, 'p'],
+            [0, 'k', 0, 0],
+            [0, 0, 'k', 0],
+            ['q', 0, 0, 0]
+        ],
+        'H0-1': [
+            [1, 0, 0, 1],
+            [0, 0, -1, 0],
+            [0, -1, 0, 0],
+            [0, 0, 0, 1]
+        ],
+        'H0-2': [
+            [1, 0, 0, 1],
+            [0, 1, 1, 0],
+            [0, -1, 1, 0],
+            [-1, 0, 0, 1]
+        ],
+    };
 
+    const eigenvalues = {
+        'H3-1': ['k', '-√(p q)', '√(p q)', 's'],
+        'H2-1': ['k^2', 'k^2', 'k^2', '-p q'],
+        'H2-2': ['k^2', 'k^2', '-p q', '-p q'],
+        'H2-3': ['-k', 'k', 'k', 'k'],
+        'H1-1': ['2 p^2', '2 p^2', '-2 q^2', '-2 q^2'],
+        'H1-2': ['p', 'p', '-q', '-q'],
+        'H1-3': ['-k^2', 'k^2', 'k^2', 'k^2'],
+        'H1-4': ['k', 'k', '-√(p q)', '√(p q)'],
+        'H0-1': ['-1', '1', '1', '1'],
+        'H0-2': ['1 + i', '1 + i', '1 - i', '1 - i'],
+    };
+
+    // Function to display selected matrix and its eigenvalues
+    document.querySelectorAll('.matrix-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const matrixKey = this.getAttribute('data-matrix');
+            let matrixHtml = '<table><tr>';
+            matrices[matrixKey].forEach(row => {
+                matrixHtml += '<tr>';
+                row.forEach(cell => {
+                    matrixHtml += `<td>${cell}</td>`;
+                });
+                matrixHtml += '</tr>';
+            });
+            matrixHtml += '</table>';
+            document.getElementById('matrix-display-4x4').innerHTML = matrixHtml;
+
+            // Display eigenvalues
+            document.getElementById('eigenvalues-4x4').innerText = `Eigenvalues for ${matrixKey}: ${eigenvalues[matrixKey].join(', ')}`;
+        });
+    });
+</script>
 <!-- Algebraic Ansatz Tab Content -->
 <div id="algebraic-ansatz" class="tab-content">
     <h2>Algebraic Ansatz</h2>
