@@ -71,9 +71,9 @@
 <!-- Summary Tab Content -->
 <div id="summary" class="tab-content active">
     <h2>Summary of Young-Baxter Operators (YBOs)</h2>
-    <p>Young-Baxter Operators (YBOs) are crucial in areas like quantum groups, knot theory, and statistical mechanics. They satisfy the Yang-Baxter equation:</p>
+    <p>Young-Baxter Operators (YBOs) are crucial in areas like statistical mechanics, quantum groups, and knot theory. They satisfy the Yang-Baxter equation:</p>
     <p style="text-align: center;"><strong>R₁R₂R₁ = R₂R₁R₂</strong></p>
-    <p>This equation governs the interaction between three particles or states in a system. Below, you can explore specific solutions for 4x4 and 9x9 YBOs matrices.</p>
+    <p>This equation governs the interaction between three particles or states in a system..</p>
 </div>
 
 <!-- Matrix Solutions Tab Content -->
@@ -87,6 +87,12 @@
         <button class="matrix-btn" data-matrix="H2-1">H2-1</button>
         <button class="matrix-btn" data-matrix="H2-2">H2-2</button>
         <button class="matrix-btn" data-matrix="H2-3">H2-3</button>
+        <button class="matrix-btn" data-matrix="H2-3">H1-1</button>
+        <button class="matrix-btn" data-matrix="H2-3">H1-2</button>
+        <button class="matrix-btn" data-matrix="H2-3">H1-3</button>
+        <button class="matrix-btn" data-matrix="H2-3">H1-4</button>
+        <button class="matrix-btn" data-matrix="H2-3">H0-1</button>
+        <button class="matrix-btn" data-matrix="H2-3">H0-2</button>
 
         <div id="matrix-display-4x4"></div>
     </div>
@@ -104,8 +110,8 @@
 <!-- Algebraic Ansatz Tab Content -->
 <div id="algebraic-ansatz" class="tab-content">
     <h2>Algebraic Ansatz</h2>
-    <p>In mathematical physics, the algebraic ansatz provides solutions to complex equations in algebraic form. This approach is particularly useful when solving integrable models, including those governed by Young-Baxter equations.</p>
-    <p>Here, we explore the algebraic solutions associated with YBOs and their role in topological quantum computing.</p>
+    <p>Classifying Yang-Baxter operators is a crucial step in the study of simulating integrable quantum systems on quantum computers. Hietarinta's early work focused on classifying constant Yang-Baxter solutions for a two-dimensional Hilbert space (qubit representation), identifying 11 families of invertible solutions, including one derived from the permutation operator. While effective for \(4 \times 4\) systems, this method becomes impractical for higher-dimensional representations.  We address this limitation by constructing constant Yang-Baxter solutions in a representation-independent manner, utilizing ansätze from algebraic structures.</p>
+    <p>Here, we explore the algebraic solutions associated with YBOs.</p>
 </div>
 
 <script>
@@ -120,26 +126,105 @@
     }
 
     // Matrix data and rendering logic
-    const matrices = {
-        'H3-1': [
-            ['k', 0, 0, 0],
-            [0, 0, 'p', 0],
-            [0, 'q', 0, 0],
-            [0, 0, 0, 's']
-        ],
-        'H2-1': [
-            ['k^2', 0, 0, 0],
-            [0, 'k^2 - p*q', 'k*p', 0],
-            [0, 'k*q', 0, 0],
-            [0, 0, 0, 'k^2']
-        ],
-        'H9-1': [
-            ['1', 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 'p', 0, 0, '1 - q*η²', 0, 0, 0, 0],
-            [0, 0, 'p²', 0, 0, '(1 - q*η)*x', 0, '(1 - q*η)*(1 - q*η²)', 0]
-        ]
-        // Additional matrices can be added here
-    };
+       const matrices = {
+            'H3-1': [
+                ['k', 0, 0, 0],
+                [0, 0, 'p', 0],
+                [0, 'q', 0, 0],
+                [0, 0, 0, 's']
+            ],
+            'H2-1': [
+                ['k^2', 0, 0, 0],
+                [0, 'k^2 - p * q', 'k * p', 0],
+                [0, 'k * q', 0, 0],
+                [0, 0, 0, 'k^2']
+            ],
+            'H2-2': [
+                ['k^2', 0, 0, 0],
+                [0, 'k^2 - p * q', 'k * p', 0],
+                [0, 'k * q', 0, 0],
+                [0, 0, 0, '-p * q']
+            ],
+            'H2-3': [
+                ['k', 'p', 'q', 's'],
+                [0, 0, 'k', 'p'],
+                [0, 'k', 0, 'q'],
+                [0, 0, 0, 'k']
+            ],
+            'H1-1': [
+                ['p^2 + 2 * p * q - q^2', 0, 0, 'p^2 - q^2'],
+                [0, 'p^2 - q^2', 'p^2 + q^2', 0],
+                [0, 'p^2 + q^2', 'p^2 - q^2', 0],
+                ['p^2 - q^2', 0, 0, 'p^2 - 2 * p * q - q^2']
+            ],
+            'H1-2': [
+                ['p', 0, 0, 'k'],
+                [0, 'p - q', 'p', 0],
+                [0, 'q', 0, 0],
+                [0, 0, 0, '-q']
+            ],
+            'H1-3': [
+                ['k^2', '-k * p', 'k * p', 'p * q'],
+                [0, 0, 'k^2', 'k * q'],
+                [0, 'k^2', 0, '-k * q'],
+                [0, 0, 0, 'k^2']
+            ],
+            'H1-4': [
+                [0, 0, 0, 'p'],
+                [0, 'k', 0, 0],
+                [0, 0, 'k', 0],
+                ['q', 0, 0, 0]
+            ],
+            'H0-1': [
+                [1, 0, 0, 1],
+                [0, 0, -1, 0],
+                [0, -1, 0, 0],
+                [0, 0, 0, 1]
+            ],
+            'H0-2': [
+                [1, 0, 0, 1],
+                [0, 1, 1, 0],
+                [0, -1, 1, 0],
+                [-1, 0, 0, 1]
+            ],
+            'H9-1': [
+                ['1', 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 'p', 0, 0, '1 - q*η²', 0, 0, 0, 0],
+                [0, 0, 'p²', 0, 0, '(1 - q*η)*x', 0, '(1 - q*η)*(1 - q*η²)', 0],
+                [0, 0, 0, 'q*p⁻¹*η²', 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 'q*η', 0, 0, '-q*(1 - q*η²)/x', 0],
+                [0, 0, 0, 0, 0, 'q*p', 0, 0, '-η²*q*(1 - q*η)'],
+                [0, 0, 0, 0, 0, 0, 'q²*p⁻²*η', 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 'q²*p⁻¹*η²', 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 'q²']
+            ],
+            'H8-1': [
+                ['1', 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 'p', 0, '1 - q', 0, 0, 0, 0, 0],
+                [0, 0, 'c', 0, 0, 0, '1 - q', 0, 0],
+                [0, 0, 0, 'q*p⁻¹', 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 'A', 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 'q*k⁻¹', 0, '1 - q', 0],
+                [0, 0, 0, 0, 0, 0, 'q*c⁻¹', 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 'k', 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 'B']
+            ]
+        };
+
+        const eigenvalues = {
+            'H3-1': ['k', '-√(p q)', '√(p q)', 's'],
+            'H2-1': ['k^2', 'k^2', 'k^2', '-p q'],
+            'H2-2': ['k^2', 'k^2', '-p q', '-p q'],
+            'H2-3': ['-k', 'k', 'k', 'k'],
+            'H1-1': ['2 p^2', '2 p^2', '-2 q^2', '-2 q^2'],
+            'H1-2': ['p', 'p', '-q', '-q'],
+            'H1-3': ['-k^2', 'k^2', 'k^2', 'k^2'],
+            'H1-4': ['k', 'k', '-√(p q)', '√(p q)'],
+            'H0-1': ['-1', '1', '1', '1'],
+            'H0-2': ['1 + i', '1 + i', '1 - i', '1 - i'],
+            'H9-1': ['eigenvalues for H9-1'], // Placeholder
+            'H8-1': ['eigenvalues for H8-1']  // Placeholder
+        };
 
     document.querySelectorAll('.matrix-btn').forEach(button => {
         button.addEventListener('click', function() {
