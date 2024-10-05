@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Knot Polynomials Viewer</title>
+    <title>YBOs Viewer & Solutions</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -12,66 +12,114 @@
             background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fcb69f);
             color: #333;
         }
-        h1, h3 {
+        h1 {
             text-align: center;
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .tabs button {
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .tabs button:hover {
+            background-color: #555;
+        }
+        .tab-content {
+            display: none;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .active {
+            display: block;
         }
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-top: 20px;
         }
-        table, td {
+        table, td, th {
             border: 1px solid #333;
             padding: 8px;
             text-align: center;
         }
-        button {
-            margin: 5px;
-        }
-        #sub-buttons-4x4, #sub-buttons-9x9 {
-            margin: 10px 0;
+        .sub-section {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 
-<h1>4x4 YBOs Viewer</h1>
+<h1>YBOs Viewer: Matrix Solutions & Algebraic Ansatz</h1>
 
-<!-- Buttons to select between 4x4 and 9x9 matrices -->
-<div>
-    <button id="btn-4x4">Show 4x4 Matrix Options</button>
-    <button id="btn-9x9">Show 9x9 Matrix Options</button>
+<!-- Tabs for different sections -->
+<div class="tabs">
+    <button class="tablink" onclick="openTab('summary')">SUMMARY YBOS</button>
+    <button class="tablink" onclick="openTab('matrix-solutions')">MATRIX SOLUTIONS (4x4 & 9x9)</button>
+    <button class="tablink" onclick="openTab('algebraic-ansatz')">ALGEBRAIC ANSATZ</button>
 </div>
 
-<!-- Sub-buttons for 4x4 matrices -->
-<div id="sub-buttons-4x4" style="display:none;">
-    <button class="ybo-button" data-ybo="H3-1">H3-1</button>
-    <button class="ybo-button" data-ybo="H2-1">H2-1</button>
-    <button class="ybo-button" data-ybo="H2-2">H2-2</button>
-    <button class="ybo-button" data-ybo="H2-3">H2-3</button>
+<!-- Summary Tab Content -->
+<div id="summary" class="tab-content active">
+    <h2>Summary of Young-Baxter Operators (YBOs)</h2>
+    <p>Young-Baxter Operators (YBOs) are crucial in areas like quantum groups, knot theory, and statistical mechanics. They satisfy the Yang-Baxter equation:</p>
+    <p style="text-align: center;"><strong>R₁R₂R₁ = R₂R₁R₂</strong></p>
+    <p>This equation governs the interaction between three particles or states in a system. Below, you can explore specific solutions for 4x4 and 9x9 YBOs matrices.</p>
 </div>
 
-<!-- Sub-buttons for 9x9 matrices -->
-<div id="sub-buttons-9x9" style="display:none;">
-    <button class="ybo-button" data-ybo="H9-1">H9-1</button>
-    <button class="ybo-button" data-ybo="H8-1">H8-1</button>
+<!-- Matrix Solutions Tab Content -->
+<div id="matrix-solutions" class="tab-content">
+    <h2>Matrix Solutions for YBOs (4x4 & 9x9)</h2>
+    
+    <div class="sub-section">
+        <h3>4x4 Matrix Solutions (H-Solutions)</h3>
+        <p>Select a 4x4 matrix solution to display its details.</p>
+        <button class="matrix-btn" data-matrix="H3-1">H3-1</button>
+        <button class="matrix-btn" data-matrix="H2-1">H2-1</button>
+        <button class="matrix-btn" data-matrix="H2-2">H2-2</button>
+        <button class="matrix-btn" data-matrix="H2-3">H2-3</button>
+
+        <div id="matrix-display-4x4"></div>
+    </div>
+
+    <div class="sub-section">
+        <h3>9x9 Matrix Solutions (H-Solutions)</h3>
+        <p>Select a 9x9 matrix solution to display its details.</p>
+        <button class="matrix-btn" data-matrix="H9-1">H9-1</button>
+        <button class="matrix-btn" data-matrix="H8-1">H8-1</button>
+
+        <div id="matrix-display-9x9"></div>
+    </div>
 </div>
 
-<!-- Display area for matrix and eigenvalues -->
-<div id="matrix-display"></div>
+<!-- Algebraic Ansatz Tab Content -->
+<div id="algebraic-ansatz" class="tab-content">
+    <h2>Algebraic Ansatz</h2>
+    <p>In mathematical physics, the algebraic ansatz provides solutions to complex equations in algebraic form. This approach is particularly useful when solving integrable models, including those governed by Young-Baxter equations.</p>
+    <p>Here, we explore the algebraic solutions associated with YBOs and their role in topological quantum computing.</p>
+</div>
 
 <script>
-    // JavaScript to handle button clicks and display matrices/eigenvalues
-    document.getElementById('btn-4x4').addEventListener('click', function() {
-        document.getElementById('sub-buttons-4x4').style.display = 'flex';
-        document.getElementById('sub-buttons-9x9').style.display = 'none';
-    });
+    // Function to switch between tabs
+    function openTab(tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].classList.remove('active');
+        }
+        document.getElementById(tabName).classList.add('active');
+    }
 
-    document.getElementById('btn-9x9').addEventListener('click', function() {
-        document.getElementById('sub-buttons-9x9').style.display = 'flex';
-        document.getElementById('sub-buttons-4x4').style.display = 'none';
-    });
-
-    // Define matrix and eigenvalue data
+    // Matrix data and rendering logic
     const matrices = {
         'H3-1': [
             ['k', 0, 0, 0],
@@ -81,81 +129,37 @@
         ],
         'H2-1': [
             ['k^2', 0, 0, 0],
-            [0, 'k^2 - p * q', 'k * p', 0],
-            [0, 'k * q', 0, 0],
+            [0, 'k^2 - p*q', 'k*p', 0],
+            [0, 'k*q', 0, 0],
             [0, 0, 0, 'k^2']
-        ],
-        'H2-2': [
-            ['k^2', 0, 0, 0],
-            [0, 'k^2 - p * q', 'k * p', 0],
-            [0, 'k * q', 0, 0],
-            [0, 0, 0, '-p * q']
-        ],
-        'H2-3': [
-            ['k', 'p', 'q', 's'],
-            [0, 0, 'k', 'p'],
-            [0, 'k', 0, 'q'],
-            [0, 0, 0, 'k']
         ],
         'H9-1': [
             ['1', 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 'p', 0, 0, '1 - q*η²', 0, 0, 0, 0],
-            [0, 0, 'p²', 0, 0, '(1 - q*η)*x', 0, '(1 - q*η)*(1 - q*η²)', 0],
-            [0, 0, 0, 'q*p⁻¹*η²', 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 'q*η', 0, 0, '-q*(1 - q*η²)/x', 0],
-            [0, 0, 0, 0, 0, 'q*p', 0, 0, '-η²*q*(1 - q*η)'],
-            [0, 0, 0, 0, 0, 0, 'q²*p⁻²*η', 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 'q²*p⁻¹*η²', 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 'q²']
-        ],
-        'H8-1': [
-            ['1', 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 'p', 0, '1 - q', 0, 0, 0, 0, 0],
-            [0, 0, 'c', 0, 0, 0, '1 - q', 0, 0],
-            [0, 0, 0, 'q*p⁻¹', 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 'A', 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 'q*k⁻¹', 0, '1 - q', 0],
-            [0, 0, 0, 0, 0, 0, 'q*c⁻¹', 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 'k', 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 'B']
+            [0, 0, 'p²', 0, 0, '(1 - q*η)*x', 0, '(1 - q*η)*(1 - q*η²)', 0]
         ]
+        // Additional matrices can be added here
     };
 
-    const eigenvalues = {
-        'H3-1': ['k', '-√(p q)', '√(p q)', 's'],
-        'H2-1': ['k^2', 'k^2', 'k^2', '-p q'],
-        'H2-2': ['k^2', 'k^2', '-p q', '-p q'],
-        'H2-3': ['-k', 'k', 'k', 'k'],
-        'H9-1': ['eigenvalues for H9-1'], // Placeholder
-        'H8-1': ['eigenvalues for H8-1']  // Placeholder
-    };
-
-    // Event listeners for YBO buttons
-    document.querySelectorAll('.ybo-button').forEach(button => {
+    document.querySelectorAll('.matrix-btn').forEach(button => {
         button.addEventListener('click', function() {
-            const ybo = this.getAttribute('data-ybo');
-            const matrixData = matrices[ybo];
-            const eigenvalueData = eigenvalues[ybo];
+            const matrixId = this.getAttribute('data-matrix');
+            const matrixData = matrices[matrixId];
 
-            if (matrixData && eigenvalueData) {
-                // Create a table for matrix display
-                let matrixHTML = '<table>';
-                matrixData.forEach(row => {
-                    matrixHTML += '<tr>';
-                    row.forEach(value => {
-                        matrixHTML += `<td>${value}</td>`;
-                    });
-                    matrixHTML += '</tr>';
+            let matrixHTML = '<table>';
+            matrixData.forEach(row => {
+                matrixHTML += '<tr>';
+                row.forEach(value => {
+                    matrixHTML += `<td>${value}</td>`;
                 });
-                matrixHTML += '</table>';
+                matrixHTML += '</tr>';
+            });
+            matrixHTML += '</table>';
 
-                // Create a string for eigenvalues display
-                const eigenvaluesHTML = `Eigenvalues: [${eigenvalueData.join(', ')}]`;
-
-                // Update the display
-                document.getElementById('matrix-display').innerHTML = matrixHTML + '<br>' + eigenvaluesHTML;
+            if (matrixId.startsWith('H3') || matrixId.startsWith('H2')) {
+                document.getElementById('matrix-display-4x4').innerHTML = matrixHTML;
             } else {
-                document.getElementById('matrix-display').innerHTML = `<p>No data available for ${ybo}.</p>`;
+                document.getElementById('matrix-display-9x9').innerHTML = matrixHTML;
             }
         });
     });
