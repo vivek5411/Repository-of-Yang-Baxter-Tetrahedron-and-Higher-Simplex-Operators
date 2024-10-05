@@ -89,12 +89,15 @@
     <button class="tablink" onclick="openTab('matrix-solutions')">YBOs SOLUTIONS</button>
     <button class="tablink" onclick="openTab('algebraic-ansatz')">ALGEBRAIC ANSATZ</button>
 </div>
-
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <!-- Summary Tab Content -->
 <div id="summary" class="tab-content active">
     <h2>Summary of Young-Baxter Operators (YBOs)</h2>
     <p>Young-Baxter Operators (YBOs) are crucial in areas like statistical mechanics, quantum groups, and knot theory. They satisfy the Yang-Baxter equation:</p>
-    <p style="text-align: center;"><strong>R₁R₂R₁ = R₂R₁R₂</strong></p>
+    <p>
+        $$R_{12} R_{13} R_{23} = R_{23} R_{13} R_{12}$$
+    </p>
     <p>This equation governs the interaction between three particles or states in a system.</p>
 </div>
 
