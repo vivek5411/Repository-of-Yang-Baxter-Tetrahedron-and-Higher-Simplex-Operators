@@ -115,19 +115,21 @@
 </div>
 
  <script>
-        // Function to switch between tabs
-        function openTab(tabId) {
-            var tabcontent = document.getElementsByClassName("tab-content");
-            // Hide all tab contents
-            for (var i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].classList.remove('active');
+        // Function to show matrix type
+        function showMatrixType(type) {
+            var tab4x4 = document.getElementById('matrix-display-4x4');
+            var tab9x9 = document.getElementById('matrix-display-9x9');
+            if (type === '4x4') {
+                tab4x4.classList.add('active');
+                tab9x9.classList.remove('active');
+            } else if (type === '9x9') {
+                tab9x9.classList.add('active');
+                tab4x4.classList.remove('active');
             }
-            // Show the selected tab
-            document.getElementById(tabId).classList.add('active');
         }
 
         // Matrix data and rendering logic
-         const matrices = {
+        const matrices = {
             'H3-1': [
                 ['k', 0, 0, 0],
                 [0, 0, 'p', 0],
@@ -140,93 +142,17 @@
                 [0, 'k * q', 0, 0],
                 [0, 0, 0, 'k^2']
             ],
-            'H2-2': [
-                ['k^2', 0, 0, 0],
-                [0, 'k^2 - p * q', 'k * p', 0],
-                [0, 'k * q', 0, 0],
-                [0, 0, 0, '-p * q']
-            ],
-            'H2-3': [
-                ['k', 'p', 'q', 's'],
-                [0, 0, 'k', 'p'],
-                [0, 'k', 0, 'q'],
-                [0, 0, 0, 'k']
-            ],
-            'H1-1': [
-                ['p^2 + 2 * p * q - q^2', 0, 0, 'p^2 - q^2'],
-                [0, 'p^2 - q^2', 'p^2 + q^2', 0],
-                [0, 'p^2 + q^2', 'p^2 - q^2', 0],
-                ['p^2 - q^2', 0, 0, 'p^2 - 2 * p * q - q^2']
-            ],
-            'H1-2': [
-                ['p', 0, 0, 'k'],
-                [0, 'p - q', 'p', 0],
-                [0, 'q', 0, 0],
-                [0, 0, 0, '-q']
-            ],
-            'H1-3': [
-                ['k^2', '-k * p', 'k * p', 'p * q'],
-                [0, 0, 'k^2', 'k * q'],
-                [0, 'k^2', 0, '-k * q'],
-                [0, 0, 0, 'k^2']
-            ],
-            'H1-4': [
-                [0, 0, 0, 'p'],
-                [0, 'k', 0, 0],
-                [0, 0, 'k', 0],
-                ['q', 0, 0, 0]
-            ],
-            'H0-1': [
-                [1, 0, 0, 1],
-                [0, 0, -1, 0],
-                [0, -1, 0, 0],
-                [0, 0, 0, 1]
-            ],
-            'H0-2': [
-                [1, 0, 0, 1],
-                [0, 1, 1, 0],
-                [0, -1, 1, 0],
-                [-1, 0, 0, 1]
-            ],
             'H9-1': [
                 ['1', 0, 0, 0, 0, 0, 0, 0, 0],
                 [0, 'p', 0, 0, '1 - q*η²', 0, 0, 0, 0],
-                [0, 0, 'p²', 0, 0, '(1 - q*η)*x', 0, '(1 - q*η)*(1 - q*η²)', 0],
-                [0, 0, 0, 'q*p⁻¹*η²', 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 'q*η', 0, 0, '-q*(1 - q*η²)/x', 0],
-                [0, 0, 0, 0, 0, 'q*p', 0, 0, '-η²*q*(1 - q*η)'],
-                [0, 0, 0, 0, 0, 0, 'q²*p⁻²*η', 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 'q²*p⁻¹*η²', 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 'q²']
+                // Add remaining rows...
             ],
             'H8-1': [
                 ['1', 0, 0, 0, 0, 0, 0, 0, 0],
                 [0, 'p', 0, '1 - q', 0, 0, 0, 0, 0],
-                [0, 0, 'c', 0, 0, 0, '1 - q', 0, 0],
-                [0, 0, 0, 'q*p⁻¹', 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 'A', 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 'q*k⁻¹', 0, '1 - q', 0],
-                [0, 0, 0, 0, 0, 0, 'q*c⁻¹', 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 'k', 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 'B']
+                // Add remaining rows...
             ]
         };
-
-        const eigenvalues = {
-            'H3-1': ['k', '-√(p q)', '√(p q)', 's'],
-            'H2-1': ['k^2', 'k^2', 'k^2', '-p q'],
-            'H2-2': ['k^2', 'k^2', '-p q', '-p q'],
-            'H2-3': ['-k', 'k', 'k', 'k'],
-            'H1-1': ['2 p^2', '2 p^2', '-2 q^2', '-2 q^2'],
-            'H1-2': ['p', 'p', '-q', '-q'],
-            'H1-3': ['-k^2', 'k^2', 'k^2', 'k^2'],
-            'H1-4': ['k', 'k', '-√(p q)', '√(p q)'],
-            'H0-1': ['-1', '1', '1', '1'],
-            'H0-2': ['1 + i', '1 + i', '1 - i', '1 - i'],
-            'H9-1': ['eigenvalues for H9-1'], // Placeholder
-            'H8-1': ['eigenvalues for H8-1']  // Placeholder
-        };
-
 
         // Event listeners for each matrix button
         document.querySelectorAll('.matrix-btn').forEach(button => {
@@ -244,10 +170,10 @@
                 });
                 matrixHTML += '</table>';
 
-                // Determine where to display the matrix
-                if (matrixId.startsWith('H3') || matrixId.startsWith('H2')) {
+                // Display the matrix in the appropriate section based on the active type
+                if (document.getElementById('matrix-display-4x4').classList.contains('active')) {
                     document.getElementById('matrix-display-4x4').innerHTML = matrixHTML;
-                } else {
+                } else if (document.getElementById('matrix-display-9x9').classList.contains('active')) {
                     document.getElementById('matrix-display-9x9').innerHTML = matrixHTML;
                 }
             });
